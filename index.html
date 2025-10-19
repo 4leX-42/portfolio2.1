@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andersen Spain - Organizational Chart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0e1116;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #8B0000;
+        }
+        
+        h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            color: #8B0000;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .level {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            width: 100%;
+        }
+        
+        .card {
+            background: #000;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 10px;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(139, 0, 0, 0.4);
+        }
+        
+        .title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        .connector {
+            width: 2px;
+            height: 40px;
+            background: #8B0000;
+            margin: 0 auto;
+        }
+        
+        .branches-container {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 48%;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(30, 30, 30, 0.7);
+        }
+        
+        .branch-title {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #8B0000;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Estilos específicos para cada nivel jerárquico */
+        .level-1 .card {
+            background: #000;
+            border: 2px solid #8B0000;
+            color: #fff;
+        }
+        .level-1 .title {
+            color: #fff;
+            font-size: 1.3rem;
+        }
+        
+        .level-2 .card {
+            background: #1a1a1a;
+            border: 2px solid #8B0000;
+            color: #fff;
+        }
+        .level-2 .title {
+            color: #fff;
+        }
+        
+        .level-3 .card {
+            background: #2a2a2a;
+            border: 2px solid #A52A2A;
+            color: #fff;
+        }
+        .level-3 .title {
+            color: #fff;
+        }
+        
+        .level-4 .card {
+            background: #3a3a3a;
+            border: 2px solid #B22222;
+            color: #fff;
+        }
+        
+        .level-5 .card {
+            background: #2a2a2a;
+            border: 2px solid #CD5C5C;
+            color: #fff;
+        }
+        
+        .level-6 .card {
+            background: #1a1a1a;
+            border: 2px solid #DC143C;
+            color: #fff;
+        }
+        
+        .level-7 .card {
+            background: #000;
+            border: 2px dashed #8B0000;
+            color: #fff;
+        }
+        
+        .practice-areas {
+            margin-top: 40px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .practice-title {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .areas-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .area-card {
+            background: #000;
+            border: 1px solid #8B0000;
+            border-radius: 6px;
+            padding: 10px 15px;
+            min-width: 150px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .area-card:hover {
+            background: #8B0000;
+            transform: scale(1.05);
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 15px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #8B0000;
+            color: #8B0000;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1100px) {
+            .branches-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .branch {
+                width: 95%;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .level {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card {
+                width: 90%;
+                margin: 8px 0;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Andersen Spain</h1>
+            <p class="subtitle">Organizational Chart</p>
+        </header>
+        
+        <div class="org-chart">
+            <!-- Nivel 1: CEO -->
+            <div class="level level-1">
+                <div class="card">
+                    <div class="title">CEO</div>
+                    <div class="desc">Chief Executive Officer</div>
+                </div>
+            </div>
+            <div class="connector"></div>
+            
+            <!-- Nivel 2: Executive Partner -->
+            <div class="level level-2">
+                <div class="card">
+                    <div class="title">Executive Partner</div>
+                    <div class="desc">Executive Leadership</div>
+                </div>
+            </div>
+            <div class="connector"></div>
+            
+            <!-- Nivel 3: CFO y CIO -->
+            <div class="level level-3">
+                <div class="card">
+                    <div class="title">CFO</div>
+                    <div class="desc">Chief Financial Officer</div>
+                </div>
+                <div class="card">
+                    <div class="title">CIO</div>
+                    <div class="desc">Chief Information Officer</div>
+                </div>
+            </div>
+            <div class="connector"></div>
+            
+            <!-- Nivel 4: Socios -->
+            <div class="level level-4">
+                <div class="card">
+                    <div class="title">Senior Partner</div>
+                    <div class="desc">Strategic Leadership</div>
+                </div>
+                <div class="card">
+                    <div class="title">Partner</div>
+                    <div class="desc">Department Leadership</div>
+                </div>
+                <div class="card">
+                    <div class="title">Finance Director</div>
+                    <div class="desc">Financial Management</div>
+                </div>
+            </div>
+            
+            <!-- Ramas separadas: Legal y Business/Support -->
+            <div class="branches-container">
+                <!-- Rama Legal -->
+                <div class="branch">
+                    <div class="branch-title">Legal & Practice Areas</div>
+                    
+                    <!-- Nivel 5: Counsel y Directores Legales -->
+                    <div class="level level-5">
+                        <div class="card">
+                            <div class="title">Counsel</div>
+                            <div class="desc">Specialized Advisory</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Of Counsel</div>
+                            <div class="desc">External Advisory</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Director</div>
+                            <div class="desc">Legal Department Director</div>
+                        </div>
+                    </div>
+                    <div class="connector"></div>
+
+                    <!-- Nivel 6: Asociados Senior y Lawers -->
+                    <div class="level level-6">
+                        <div class="card">
+                            <div class="title">Senior Associate</div>
+                            <div class="desc">Consolidated Experience</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Lawyer</div>
+                            <div class="desc">Legal Professional</div>
+                        </div>
+                    </div>
+                    <div class="connector"></div>
+
+                    <!-- Nivel 7: Asociados y Asistentes -->
+                    <div class="level level-7">
+                        <div class="card">
+                            <div class="title">Associate</div>
+                            <div class="desc">Experienced Professional</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Assistant</div>
+                            <div class="desc">Legal Support</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Executive Assistant</div>
+                            <div class="desc">Executive Support</div>
+                        </div>
+                    </div>
+                    <div class="connector"></div>
+
+                    <!-- Nivel 8: Trainees y Paralegals -->
+                    <div class="level level-7">
+                        <div class="card">
+                            <div class="title">Trainee</div>
+                            <div class="desc">In Training</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Paralegal</div>
+                            <div class="desc">Legal Assistant</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rama Business & Support -->
+                <div class="branch">
+                    <div class="branch-title">Business & Support</div>
+                    
+                    <!-- Nivel 5: Directores de Área -->
+                    <div class="level level-5">
+                        <div class="card">
+                            <div class="title">Director of IT</div>
+                            <div class="desc">IT Department Director</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Director of Cyber</div>
+                            <div class="desc">Cybersecurity Director</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Director of People & Talent</div>
+                            <div class="desc">HR Director</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Head of Billing & Collections</div>
+                            <div class="desc">Billing Management</div>
+                        </div>
+                    </div>
+                    <div class="connector"></div>
+
+                    <!-- Nivel 6: Managers y Especialistas -->
+                    <div class="level level-6">
+                        <div class="card">
+                            <div class="title">Business Development</div>
+                            <div class="desc">Business Growth</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Controller</div>
+                            <div class="desc">Financial Control</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Manager</div>
+                            <div class="desc">Department Manager</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Comunicación y Relaciones Institucionales</div>
+                            <div class="desc">PR & Institutional Relations</div>
+                        </div>
+                    </div>
+                    <div class="connector"></div>
+
+                    <!-- Nivel 7: Técnicos y Especialistas -->
+                    <div class="level level-7">
+                        <div class="card">
+                            <div class="title">Billing Manager</div>
+                            <div class="desc">Billing Operations</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Técnico IT</div>
+                            <div class="desc">IT Technician</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Digitalización</div>
+                            <div class="desc">Digital Transformation</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">IT Support</div>
+                            <div class="desc">Technical Support</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Consultora</div>
+                            <div class="desc">Consulting Services</div>
+                        </div>
+                    </div>
+                    <div class="connector"></div>
+
+                    <!-- Nivel 8: Soporte y Administración -->
+                    <div class="level level-7">
+                        <div class="card">
+                            <div class="title">Facility Services</div>
+                            <div class="desc">Facility Management</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Marketing</div>
+                            <div class="desc">Marketing & Communications</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Recepcion</div>
+                            <div class="desc">Reception Services</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Administración</div>
+                            <div class="desc">Administrative Services</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Áreas de Práctica -->
+            <div class="practice-areas">
+                <div class="practice-title">Practice Areas</div>
+                <div class="areas-container">
+                    <div class="area-card">Tax</div>
+                    <div class="area-card">Laboral</div>
+                    <div class="area-card">Mercantil</div>
+                    <div class="area-card">Fiscal - Contable</div>
+                    <div class="area-card">Inmobiliario</div>
+                    <div class="area-card">Público</div>
+                    <div class="area-card">IT Legaltech</div>
+                    <div class="area-card">Digitalización</div>
+                </div>
+            </div>
+            
+            <!-- Leyenda -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #000; border: 2px solid #8B0000;"></div>
+                    <span>Executive Leadership</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #1a1a1a; border: 2px solid #8B0000;"></div>
+                    <span>Senior Management</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #2a2a2a; border: 2px solid #A52A2A;"></div>
+                    <span>Department Leadership</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #3a3a3a; border: 2px solid #B22222;"></div>
+                    <span>Management</span>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer">
+                <p>© 2024 Andersen Spain | Designed by Alejandro Andreu</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Efecto de aparición gradual de las tarjetas
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card, .area-card');
+            
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+            
+            // Establecer opacidad inicial y transformación
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+        });
+    </script>
+</body>
+</html>
