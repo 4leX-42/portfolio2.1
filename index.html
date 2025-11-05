@@ -259,12 +259,13 @@
     }
 
     .system-status {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;
+  position: relative; /* Permite posicionar la hora a la derecha */
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
 
     .status-indicator {
       width: 10px;
@@ -281,9 +282,11 @@
     }
 
     .datetime {
-      color: var(--muted);
-      font-size: 14px;
-    }
+  position: absolute;
+  right: 0; /* Pega la hora a la derecha */
+  top: 50%;
+  transform: translateY(-50%);
+}
 
     /* Layout */
     .top{
