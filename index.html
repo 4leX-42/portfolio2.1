@@ -6,1271 +6,660 @@
   <title>Alejandro Andreu — IT Infrastructure & Cloud Specialist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* 1. COLORES REFINADOS */
     :root {
-      --bg-primary: #0a0a12;
-      --bg-secondary: #12121a;
-      --bg-card: rgba(20, 20, 28, 0.92);
-      --text-primary: #f0f0f0;
-      --text-secondary: #b0b0c0;
-      --accent-green: #00e085;
-      --accent-cyan: #00d0ff;
-      --accent-yellow: #ffd700;
-      --accent-blue: #5a9cff;
-      --accent-red: #ff5a5a;
-      --border-primary: rgba(0, 224, 133, 0.5);
-      --border-secondary: rgba(0, 208, 255, 0.4);
-      --glow-green: 0 0 12px rgba(0, 224, 133, 0.7);
-      --glow-cyan: 0 0 12px rgba(0, 208, 255, 0.7);
-      --glow-yellow: 0 0 12px rgba(255, 215, 0, 0.7);
-      --glow-blue: 0 0 12px rgba(90, 156, 255, 0.7);
-      --max-width: 1280px;
-      --border-radius: 6px;
-      font-family: 'Share Tech Mono', monospace;
+      --bg: #0c0d0f;
+      --surface: #131518;
+      --surface-2: #1a1d21;
+      --border: #1f2329;
+      --border-strong: #2a2f37;
+      --text: #ece7dc;
+      --muted: #8a847a;
+      --dim: #4e4a45;
+      --accent: #c9a561;
+      --accent-soft: rgba(201, 165, 97, 0.08);
+      --accent-dim: #8a6e38;
+      --max-width: 1120px;
+      --rail: 56px;
     }
 
-    /* Reset y base */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      height: 100%;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      overflow-x: hidden;
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* Efecto de pantalla CRT */
-    .crt-overlay {
+    body {
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 70% 40% at 50% -5%, rgba(201, 165, 97, 0.05), transparent 70%);
+      position: relative;
+    }
+
+    /* Side rail — visual identity, non-interactive */
+    .rail {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        linear-gradient(rgba(0, 224, 133, 0.02) 50%, transparent 50%),
-        linear-gradient(90deg, rgba(255, 90, 90, 0.02), rgba(0, 208, 255, 0.01), rgba(90, 156, 255, 0.02));
-      background-size: 100% 6px, 4px 100%;
-      z-index: 100;
-      pointer-events: none;
-      animation: scan 12s linear infinite;
-      opacity: 0.3;
-    }
-
-    @keyframes scan {
-      0% { background-position: 0 0, 0 0; }
-      100% { background-position: 0 100%, 0 0; }
-    }
-
-    /* Boot sequence */
-    .boot {
-      position: fixed;
-      inset: 0;
+      bottom: 0;
+      width: var(--rail);
+      border-right: 1px solid var(--border);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-primary);
-      z-index: 1000;
-      font-family: 'Share Tech Mono', monospace;
-      overflow: hidden;
-    }
-
-    .boot-terminal {
-      position: relative;
-      color: var(--accent-green);
-      text-shadow: var(--glow-green);
-      font-size: 16px;
-      width: 100%;
-      max-width: 800px;
-      padding: 30px;
-      background: rgba(10, 10, 18, 0.95);
-      border: 1px solid var(--accent-green);
-      box-shadow: 0 0 30px rgba(0, 224, 133, 0.4);
-    }
-
-    .boot-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .terminal-line {
-      opacity: 0;
-      margin-bottom: 12px;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid var(--accent-green);
-      animation: typeLine 0.8s forwards, blinkCursor 0.8s infinite;
-      font-size: 16px;
-    }
-
-    .system-init { 
-      animation-delay: 0.2s; 
-      color: var(--accent-cyan); 
-    }
-    .system-loading { 
-      animation-delay: 0.7s; 
-      color: var(--accent-cyan); 
-    }
-    .system-connect { 
-      animation-delay: 1.2s; 
-      color: var(--accent-cyan); 
-    }
-    .system-ready { 
-      animation-delay: 1.8s; 
-      color: var(--accent-green); 
-      font-weight: bold;
-    }
-    
-    .access-granted { 
-      opacity: 0;
-      margin-bottom: 12px;
-      font-size: 20px;
-      font-weight: bold;
-      color: var(--accent-green);
-      text-shadow: var(--glow-green);
-      animation: delayedAppear 0.1s 2.5s forwards, glitchEffect 0.5s 3.0s, pulse 2s infinite 3.5s;
-    }
-
-    @keyframes typeLine {
-      0% { 
-        opacity: 0;
-        width: 0;
-      }
-      100% { 
-        opacity: 1;
-        width: 100%;
-      }
-    }
-
-    @keyframes delayedAppear {
-      0% { 
-        opacity: 0;
-      }
-      100% { 
-        opacity: 1;
-      }
-    }
-
-    @keyframes blinkCursor {
-      0%, 100% { border-color: var(--accent-green); }
-      50% { border-color: transparent; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; text-shadow: var(--glow-green); }
-      50% { opacity: 0.8; text-shadow: 0 0 5px rgba(0, 224, 133, 0.4); }
-    }
-
-    @keyframes glitchEffect {
-      0% { transform: translate(0); filter: hue-rotate(0deg); }
-      10% { transform: translate(-2px, 1px); filter: hue-rotate(90deg); }
-      20% { transform: translate(2px, -1px); filter: hue-rotate(180deg); }
-      30% { transform: translate(-1px, 2px); filter: hue-rotate(270deg); }
-      40% { transform: translate(1px, -2px); filter: hue-rotate(360deg); }
-      50% { transform: translate(0); filter: hue-rotate(0deg); }
-      60% { transform: translate(-1px, -1px); filter: hue-rotate(90deg); }
-      70% { transform: translate(1px, 1px); filter: hue-rotate(180deg); }
-      80% { transform: translate(-2px, 2px); filter: hue-rotate(270deg); }
-      90% { transform: translate(2px, -2px); filter: hue-rotate(360deg); }
-      100% { transform: translate(0); filter: hue-rotate(0deg); }
-    }
-
-    .boot.fade-out {
-      animation: cinematicFadeOut 1.2s ease-in-out forwards;
-    }
-
-    @keyframes cinematicFadeOut {
-      0% { 
-        opacity: 1;
-        filter: brightness(1) blur(0);
-      }
-      30% {
-        opacity: 0.9;
-        filter: brightness(1.1) blur(1px);
-      }
-      70% {
-        opacity: 0.5;
-        filter: brightness(1.3) blur(2px);
-      }
-      100% { 
-        opacity: 0;
-        filter: brightness(1.5) blur(4px);
-        display: none;
-      }
-    }
-
-    .hidden { display: none; }
-
-    .content-reveal {
-      opacity: 0;
-      animation: contentReveal 1s ease-in-out 0.3s forwards;
-    }
-
-    @keyframes contentReveal {
-      0% { 
-        opacity: 0;
-        transform: translateY(10px);
-        filter: blur(3px);
-      }
-      100% { 
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-      }
-    }
-
-    /* Cabecera */
-    .terminal-header {
-      padding: 12px 3vw;
-      border-bottom: 1px solid var(--border-primary);
-      margin-bottom: 20px;
-      background: rgba(10, 10, 18, 0.9);
-      backdrop-filter: blur(5px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .system-status {
-      display: flex;
+      flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      max-width: var(--max-width);
-      margin: 0 auto;
+      padding: 30px 0;
+      z-index: 10;
+      background: var(--bg);
+      pointer-events: none;
     }
 
-    .status-container {
-      display: flex;
-      align-items: center;
+    .monogram {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 24px;
+      color: var(--accent);
+      letter-spacing: -1px;
+      line-height: 1;
     }
 
-    .status-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent-green);
-      box-shadow: var(--glow-green);
-      animation: pulse 2s infinite;
-      margin-right: 10px;
+    .rail-mark {
+      width: 1px;
+      height: 72px;
+      background: var(--border-strong);
     }
 
-    .status-text {
-      font-weight: bold;
-      letter-spacing: 1px;
-      color: var(--accent-green);
+    .rail-caption {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
     }
 
-    .datetime {
-      color: var(--text-secondary);
-      font-size: 14px;
-      text-align: right;
-    }
-
-    /* 4. ESTRUCTURA Y LAYOUT MEJORADO */
-    .top {
-      padding: 20px 3vw;
-      display: flex;
-      justify-content: center;
-      min-height: calc(100vh - 60px);
-    }
+    a { color: inherit; }
 
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 0 3vw 40px;
+      padding: 96px 48px 64px calc(var(--rail) + 56px);
       position: relative;
-      z-index: 10;
-      width: 100%;
     }
 
-    /* Identidad */
-    .identity {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border-primary);
+    /* Hero */
+    .hero {
+      padding-bottom: 52px;
+      margin-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
     }
 
-    /* 3. TIPOGRAFÍA MEJORADA */
+    .hero-rule {
+      width: 44px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 28px;
+    }
+
     .name {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 42px;
-      letter-spacing: 1.5px;
-      margin: 0;
-      color: var(--accent-green);
-      text-shadow: var(--glow-green);
-      line-height: 1.1;
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 104px;
+      line-height: 0.95;
+      letter-spacing: -2.8px;
+      color: var(--text);
+      margin-bottom: 28px;
     }
 
     .role {
-      margin: 10px 0 0;
-      color: var(--accent-cyan);
-      font-weight: 600;
-      letter-spacing: 1.2px;
       font-size: 20px;
-      text-shadow: var(--glow-cyan);
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 12px;
+      letter-spacing: 0.1px;
+    }
+
+    .role .accent {
+      color: var(--accent);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.15em;
+      padding: 0 2px;
     }
 
     .loc {
-      margin: 6px 0 0;
-      color: var(--text-secondary);
-      font-size: 15px;
-      letter-spacing: 0.6px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    /* Botones */
-    .terminal-btn {
-      background: rgba(5, 5, 10, 0.95);
-      border: 1px solid var(--accent-green);
-      padding: 10px 16px;
-      border-radius: var(--border-radius);
-      color: var(--accent-green);
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      font-family: 'Share Tech Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 1.6px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 13px;
     }
 
-    .terminal-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 224, 133, 0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .terminal-btn:hover::before {
-      left: 100%;
-    }
-
-    .terminal-btn:hover {
-      box-shadow: var(--glow-green);
-      background: rgba(0, 0, 0, 0.95);
-      transform: translateY(-2px);
-    }
-
-    .terminal-btn.ghost {
-      border-style: dashed;
-      color: var(--accent-green);
-      border-color: var(--accent-green);
-      background: rgba(5, 5, 10, 0.95);
-    }
-
-    /* Tarjetas */
-    .terminal-card {
-      background: var(--bg-card);
-      border-radius: var(--border-radius);
-      padding: 24px;
-      border: 1px solid var(--border-primary);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-      margin-bottom: 20px;
-    }
-
-    .terminal-card:hover {
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-      transform: translateY(-3px);
-      border-color: var(--accent-green);
-    }
-
-    .profile-feature {
-      margin-top: 16px;
-    }
-
-    .card-title {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--accent-green);
-      margin: 0 0 18px;
+    /* Profile */
+    .profile {
+      max-width: 68ch;
       font-size: 18px;
-      letter-spacing: 1px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 80px;
+      font-weight: 400;
+    }
+
+    .profile::first-letter {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.4em;
+      color: var(--accent);
+      padding-right: 2px;
+      line-height: 1;
+    }
+
+    /* Section heading */
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
       text-transform: uppercase;
-      border-bottom: 1px solid rgba(0, 224, 133, 0.2);
-      padding-bottom: 8px;
+      letter-spacing: 2.5px;
+      color: var(--text);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
     }
 
-    .card-title.alt {
-      color: var(--accent-blue);
+    .section-title .num {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 17px;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-transform: none;
+      min-width: 28px;
     }
-
-    .sub {
-      margin-top: 15px;
-      margin-bottom: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 14px;
-    }
-
-    .sub.cyan { color: var(--accent-cyan); }
-    .sub.yellow { color: var(--accent-yellow); }
-    .sub.green { color: var(--accent-green); }
-    .sub.blue { color: var(--accent-blue); }
 
     /* Grid */
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 24px;
-      align-items: start;
-      margin-top: 20px;
+      grid-template-columns: 1fr 1.25fr 1fr;
+      gap: 64px;
+      margin-bottom: 88px;
     }
 
-    .col-1, .col-2, .col-3 {
-      display: flex;
-      flex-direction: column;
+    .col { display: flex; flex-direction: column; gap: 56px; }
+
+    /* Sub-section label */
+    .sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      margin-top: 26px;
     }
+    .sub:first-child { margin-top: 0; }
 
     /* Chips */
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 7px;
       list-style: none;
-      padding: 0;
-      margin: 0 0 15px 0;
     }
 
     .chips li {
-      background: rgba(15, 15, 22, 0.7);
-      border: 1px solid var(--border-primary);
-      padding: 6px 12px;
-      border-radius: var(--border-radius);
-      color: var(--text-primary);
-      font-weight: 600;
-      transition: all 0.2s ease;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 6px 11px;
+      border-radius: 2px;
+      letter-spacing: 0.2px;
+      transition: border-color 0.18s, color 0.18s;
     }
 
     .chips li:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--glow-green);
-      border-color: var(--accent-green);
+      border-color: var(--accent-dim);
+      color: var(--accent);
     }
 
-    .chips.alt li {
-      border-color: var(--accent-cyan);
+    .chips.cert li {
+      border-color: var(--accent-dim);
+      color: var(--accent);
+      background: var(--accent-soft);
     }
 
-    .cert-chip {
-      border-color: var(--accent-yellow) !important;
-      color: var(--accent-yellow) !important;
-    }
-
-    .cert-chip:hover {
-      box-shadow: var(--glow-yellow) !important;
-    }
-
-    /* Idiomas */
-    .languages {
-      margin-top: 10px;
-    }
-
-    .language-item {
+    /* Languages */
+    .lang {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-      padding: 8px 0;
-      border-bottom: 1px dashed rgba(0, 224, 133, 0.1);
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
     }
+    .lang:last-child { border-bottom: none; }
 
     .lang-name {
-      color: var(--accent-cyan);
-      font-size: 14px;
+      font-size: 15px;
+      color: var(--text);
+      letter-spacing: 0.1px;
     }
 
-    .lang-level {
+    .lang-dots {
       display: flex;
-      gap: 4px;
+      gap: 5px;
     }
 
-    .level-dot {
-      width: 10px;
-      height: 10px;
+    .dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: rgba(0, 224, 133, 0.2);
-      border: 1px solid var(--accent-green);
+      background: var(--border-strong);
+    }
+    .dot.on {
+      background: var(--accent);
     }
 
-    .level-dot.active {
-      background: var(--accent-green);
-      box-shadow: var(--glow-green);
+    /* Experience / Education items */
+    .item {
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
     }
+    .item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
 
-    /* Timeline */
-    .timeline {
-      margin: 15px 0;
-    }
-
-    .timeline-item {
-      display: flex;
-      margin-bottom: 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px dashed rgba(0, 224, 133, 0.1);
-    }
-
-    .timeline-date {
-      min-width: 110px;
-      color: var(--accent-cyan);
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .timeline-content {
-      flex: 1;
-    }
-
-    .timeline-title {
-      color: var(--accent-yellow);
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .timeline-desc {
-      color: var(--text-secondary);
-      font-size: 13px;
-    }
-
-    /* Animación hacker */
-    .hacker-animation {
-      background: rgba(10, 10, 18, 0.9) !important;
-      border: 1px solid var(--accent-cyan) !important;
-      padding: 20px !important;
-      margin-bottom: 20px !important;
-      min-height: 150px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .code-line {
-      margin-bottom: 8px;
-      font-size: 14px;
-      opacity: 0;
-      animation: fadeInLine 0.5s forwards;
-    }
-
-    .code-line:nth-child(1) { animation-delay: 0.2s; }
-    .code-line:nth-child(2) { animation-delay: 0.8s; }
-    .code-line:nth-child(3) { animation-delay: 1.4s; }
-    .code-line:nth-child(4) { animation-delay: 2.0s; }
-    .code-line:nth-child(5) { animation-delay: 2.6s; }
-
-    @keyframes fadeInLine {
-      to { opacity: 1; }
-    }
-
-    .blinking {
-      animation: blink 2s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    /* Experiencia */
-    .exp-item {
-      margin-top: 10px;
-    }
-
-    .exp-head {
-      margin-bottom: 12px;
-    }
-
-    .role-title {
-      font-weight: 700;
+    .item-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1.2px;
+      margin-bottom: 10px;
       text-transform: uppercase;
-      font-size: 16px;
+    }
+
+    .item-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
       margin-bottom: 5px;
+      letter-spacing: 0.1px;
     }
 
-    .role-title.yellow { color: var(--accent-yellow); }
-
-    .muted {
-      color: var(--text-secondary);
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
-
-    .tools {
-      font-size: 13px;
-      color: var(--text-secondary);
-      font-style: italic;
-    }
-
-    .tools.cyan { color: var(--accent-cyan); }
-
-    .bullet {
-      margin-top: 10px;
-      padding-left: 18px;
-    }
-
-    .bullet li {
-      margin-bottom: 6px;
+    .item-sub {
       font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .item-tools {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--dim);
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+      line-height: 1.6;
+    }
+
+    .bullets {
+      list-style: none;
+      padding: 0;
+      margin-top: 14px;
+    }
+
+    .bullets li {
+      font-size: 14.5px;
+      color: var(--text);
+      padding-left: 20px;
+      margin-bottom: 9px;
       position: relative;
+      line-height: 1.65;
     }
 
-    .bullet li::before {
-      content: ">";
+    .bullets li::before {
+      content: '';
       position: absolute;
-      left: -12px;
-      color: var(--accent-green);
+      left: 0;
+      top: 11px;
+      width: 12px;
+      height: 1px;
+      background: var(--accent);
     }
 
-    /* Proyectos */
-    .proj-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 12px;
-    }
+    /* Projects */
+    .proj-list { display: flex; flex-direction: column; gap: 10px; }
 
     .proj {
-      background: rgba(15, 15, 22, 0.6);
-      padding: 18px;
-      border-radius: var(--border-radius);
-      border: 1px solid rgba(0, 224, 133, 0.2);
-      font-size: 14px;
-      transition: all 0.3s ease;
-      min-height: 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      display: block;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: transparent;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background 0.2s;
     }
 
     .proj:hover {
-      border-color: var(--accent-green);
-      box-shadow: 0 0 10px rgba(0, 224, 133, 0.2);
-      transform: translateY(-3px);
+      border-color: var(--accent-dim);
+      background: var(--surface);
     }
 
-    .proj p {
-      margin: 8px 0 0;
-      color: var(--text-secondary);
+    .proj-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
     }
 
-    .proj-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
+    .proj-name {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.1px;
     }
 
-    .proj-link:hover .proj {
-      border-color: var(--accent-green);
-      box-shadow: 0 0 15px rgba(0, 224, 133, 0.3);
-      transform: translateY(-4px);
+    .proj-ext {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--accent);
+      opacity: 0.55;
+      transition: opacity 0.15s;
     }
 
-    .project-link-indicator {
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--accent-cyan);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .proj-link:hover .project-link-indicator {
+    a.proj:hover .proj-ext {
       opacity: 1;
-      animation: blink 1s infinite;
+    }
+
+    .proj-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.55;
     }
 
     /* Footer */
     .foot {
-      text-align: center;
-      padding: 28px 0;
-      color: var(--text-secondary);
-      font-size: 13px;
-      border-top: 1px solid var(--border-primary);
-      margin-top: 40px;
-    }
-
-    .terminal-footer {
-      position: relative;
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 24px;
+      flex-wrap: wrap;
     }
 
-    .cursor {
-      animation: blink 1s infinite;
-      color: var(--accent-green);
+    .signature {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 19px;
+      color: var(--muted);
+      letter-spacing: 0.2px;
     }
 
-    /* Efecto glitch ocasional */
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-1px, 1px); }
-      40% { transform: translate(-1px, -1px); }
-      60% { transform: translate(1px, 1px); }
-      80% { transform: translate(1px, -1px); }
-      100% { transform: translate(0); }
+    .signature .amp {
+      color: var(--accent);
+      padding: 0 2px;
     }
 
-    .glitch {
-      animation: glitch 0.2s linear;
+    .contacts {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
     }
 
-    /* Typing cursor */
-    .typing-cursor {
-      display: inline-block;
-      width: 8px;
-      height: 1.2em;
-      background-color: var(--accent-green);
-      margin-left: 2px;
-      animation: blink 1s infinite;
-      vertical-align: middle;
+    .contact-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      transition: color 0.15s;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .contact-link:hover {
+      color: var(--accent);
+    }
+
+    .copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 1.2px;
     }
 
     /* Responsive */
-    @media (max-width: 1180px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .col-3 {
-        grid-column: 1 / span 2;
-      }
-    }
-
     @media (max-width: 980px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .col-3 {
-        grid-column: 1;
-      }
-      
-      .actions {
-        flex-wrap: wrap;
-      }
-      
-      .name {
-        font-size: 30px;
-      }
-      
-      .identity {
-        flex-direction: column;
-      }
+      .grid { grid-template-columns: 1fr 1fr; gap: 52px; }
+      .col:last-child { grid-column: 1 / -1; }
+      .name { font-size: 80px; letter-spacing: -2.2px; }
     }
 
-    @media (max-width: 768px) {
-      .system-status {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .terminal-btn {
-        padding: 8px 12px;
-        font-size: 12px;
-      }
-      
-      .name {
-        font-size: 26px;
-      }
-      
-      .role {
-        font-size: 16px;
-      }
-      
-      .grid {
-        gap: 18px;
-      }
-      
-      .datetime {
-        text-align: center;
-      }
+    @media (max-width: 680px) {
+      :root { --rail: 40px; }
+      .container { padding: 56px 24px 40px calc(var(--rail) + 24px); }
+      .grid { grid-template-columns: 1fr; gap: 52px; }
+      .col:last-child { grid-column: auto; }
+      .name { font-size: 60px; letter-spacing: -1.8px; }
+      .role { font-size: 18px; }
+      .profile { font-size: 16.5px; margin-bottom: 56px; }
+      .rail-caption { display: none; }
+      .monogram { font-size: 22px; }
+      .foot { flex-direction: column; align-items: flex-start; gap: 20px; }
     }
 
-    /* Asegurar que el fondo cubre toda la página */
-    body {
-      min-height: 100vh;
-      background: var(--bg-primary);
-    }
-
-    /* Canvas layer behind */
-    .fx-layer {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Elevate content above FX */
-    .container, .top, main {
-      position: relative;
-      z-index: 1;
+    @media (max-width: 420px) {
+      .name { font-size: 48px; }
     }
   </style>
 </head>
-<body class="terminal">
-  <!-- Efecto de pantalla CRT -->
-  <div class="crt-overlay"></div>
-  
-  <!-- Boot sequence -->
-  <div id="boot" class="boot">
-    <div class="boot-terminal">
-      <div class="boot-content">
-        <div class="terminal-line system-init">> INITIALIZING TERMINAL...</div>
-        <div class="terminal-line system-loading">> LOADING SECURITY PROTOCOLS...</div>
-        <div class="terminal-line system-connect">> ESTABLISHING CONNECTION...</div>
-        <div class="terminal-line system-ready">> SYSTEM READY</div>
-        <div class="access-granted">> ACCESS GRANTED</div>
-      </div>
-    </div>
-  </div>
+<body>
 
-  <main id="app" class="hidden content-reveal">
-    <!-- Cabecera tipo terminal -->
-    <header class="terminal-header">
-      <div class="system-status">
-        <div class="status-container">
-          <span class="status-indicator online"></span>
-          <span class="status-text">SYSTEM ONLINE</span>
-        </div>
-        <span class="datetime" id="datetime"></span>
-      </div>
-    </header>
+  <aside class="rail" aria-hidden="true">
+    <span class="monogram">aa</span>
+    <span class="rail-mark"></span>
+    <span class="rail-caption">Madrid · ES</span>
+  </aside>
 
-    <section class="top">
-      <div class="container">
-        <!-- Identidad con efecto de escritura -->
-        <div class="identity">
-          <div class="titles">
-            <h1 class="name" id="typed-name"></h1>
-            <p class="role" id="typed-role"></p>
-            <p class="loc" id="typed-loc"></p>
-          </div>
-          <nav class="actions">
-            <a class="btn terminal-btn" href="https://www.linkedin.com/in/alex-andreu/" target="_blank" rel="noopener">
-              <span class="btn-text">[LINKEDIN]</span>
-            </a>
-            <a class="btn terminal-btn" href="https://github.com/4leX-42" target="_blank" rel="noopener">
-              <span class="btn-text">[GITHUB]</span>
-            </a>
-            <button id="copyEmail" class="btn ghost terminal-btn">
-              <span class="btn-text">[COPY_EMAIL]</span>
-            </button>
-          </nav>
-        </div>
+  <main class="container">
 
-        <!-- PERFIL con efecto de escritura -->
-        <article class="card profile-feature terminal-card">
-          <h3 class="card-title alt" id="profile-title"></h3>
-          <p id="profile-text"></p>
-        </article>
-
-        <!-- GRID principal -->
-        <section class="grid">
-          <!-- Columna 1: Competencias e Idiomas -->
-          <div class="col-1">
-            <article class="card terminal-card">
-              <h3 class="card-title">> COMPETENCIAS DESTACADAS</h3>
-              <div class="sub cyan">SISTEMAS & CLOUD</div>
-              <ul class="chips">
-                <li>Win Server / AD</li><li>GNU/Linux</li><li>Azure</li><li>ZTP</li>
-                <li>VMware / Hyper‑V</li><li>Firewalls</li><li>Microsoft 365</li><li>Network Infrastructure</li>
-              </ul>
-              <div class="sub yellow">DESARROLLO</div>
-              <ul class="chips">
-                <li>C / C++</li><li>Bash</li><li>PowerShell</li><li>HTML / CSS / JS</li><li>SQL</li>
-              </ul>
-              <div class="sub green">HABILIDADES</div>
-              <ul class="chips">
-                <li>IT Security</li><li>Cloud Migration</li><li>Automation</li>
-                <li>IT Support</li><li>Docker / K8s</li>
-              </ul>
-              
-              <!-- Sección de idiomas -->
-              <div class="sub blue">IDIOMAS</div>
-              <div class="languages">
-                <div class="language-item">
-                  <span class="lang-name">Español</span>
-                  <div class="lang-level">
-                    <span class="level-dot active"></span>
-                    <span class="level-dot active"></span>
-                    <span class="level-dot active"></span>
-                    <span class="level-dot active"></span>
-                    <span class="level-dot active"></span>
-                  </div>
-                </div>
-                <div class="language-item">
-                  <span class="lang-name">Inglés</span>
-                  <div class="lang-level">
-                    <span class="level-dot active"></span>
-                    <span class="level-dot active"></span>
-                    <span class="level-dot active"></span>
-                    <span class="level-dot"></span>
-                    <span class="level-dot"></span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <!-- Columna 2: Experiencia y Formación -->
-          <div class="col-2">
-            <article class="card terminal-card">
-              <h3 class="card-title">> EXPERIENCIA</h3>
-              <div class="exp-item">
-                <div class="exp-head">
-                  <div>
-                    <div class="role-title yellow">IT SUPPORT — ANDERSEN IN SPAIN</div>
-                    <div class="muted">JUN. 2025 — ACTUALIDAD · PRÁCTICAS · PRESENCIAL</div>
-                    <div class="tools cyan">Windows Server · Azure · Intune-MDM · PaperCut · Backup</div>
-                  </div>
-                </div>
-                <ul class="bullet">
-                  <li>Soporte a usuarios y resolución de incidencias</li>
-                  <li>Mantenimiento y configuración de equipos</li>
-                  <li>Gestión de redes y configuración de servidores</li>
-                  <li>Migraciones locales a Azure, IAM - MDM - despliegue automatizado con Autopilot</li>
-                </ul>
-              </div>
-            </article>
-
-            <!-- Animación hacker -->
-            <div class="hacker-animation terminal-card">
-              <div class="code-line">> ANALYZING SYSTEM INTEGRITY...</div>
-              <div class="code-line">> SECURITY: <span style="color: var(--accent-green)">OPTIMAL</span></div>
-              <div class="code-line">> NETWORK: <span style="color: var(--accent-cyan)">STABLE</span></div>
-              <div class="code-line">> CLOUD SERVICES: <span style="color: var(--accent-yellow)">OPERATIONAL</span></div>
-              <div class="code-line blinking">> READY FOR NEW CHALLENGES</div>
-            </div>
-
-            <article class="card terminal-card">
-              <h3 class="card-title">> FORMACIÓN & CERTIFICACIONES</h3>
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-date cyan">2025–2027</div>
-                  <div class="timeline-content">
-                    <div class="timeline-title yellow">ASIR · FP CEU MADRID</div>
-                    <div class="timeline-desc">Administración de Sistemas Informáticos en Red</div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-date cyan">2023–2025</div>
-                  <div class="timeline-content">
-                    <div class="timeline-title yellow">SMR · FP CEU MADRID</div>
-                    <div class="timeline-desc">Sistemas Microinformáticos y Redes</div>
-                  </div>
-                </div>
-              </div>
-              <div class="sub green">CERTIFICACIONES</div>
-              <ul class="chips alt">
-                <li class="cert-chip">Cisco CCNA 1</li>
-                <li class="cert-chip">IT Essentials</li>
-                <li class="cert-chip">Microsoft Azure Fundamentals</li>
-              </ul>
-            </article>
-          </div>
-
-          <!-- Columna 3: Proyectos -->
-          <div class="col-3">
-            <article class="card terminal-card">
-              <h3 class="card-title">> PROYECTOS</h3>
-              <div class="proj-grid">
-                <div class="proj">
-                  <div class="sub cyan">> IMPLEMENTACIÓN DE ACTIVE DIRECTORY</div>
-                  <p>Creación de usuarios, grupos y políticas GPO. LDAP/Kerberos.</p>
-                </div>
-                <div class="proj">
-                  <div class="sub yellow">> MIGRACIÓN A WINDOWS SERVER 2022</div>
-                  <p>Hyper‑V, DFS, DHCP y DNS empresarial.</p>
-                </div>
-                <a href="https://github.com/4lex-42/Discovery-Web-42" target="_blank" class="proj-link">
-                  <div class="proj">
-                    <div class="sub green">> PISCINE DISCOVERY WEB — 42 MADRID</div>
-                    <p>ENE 2025 · Mini‑proyectos full‑stack (front/back).</p>
-                    <div class="project-link-indicator">↗ ENLACE A GITHUB</div>
-                  </div>
-                </a>
-                <a href="https://github.com/4leX-42/42-Madrid.Piscine-C-Shell.git" target="_blank" class="proj-link">
-                  <div class="proj">
-                    <div class="sub blue">> PISCINE C & SHELL — 42 MADRID</div>
-                    <p>FEB–MAR 2024 · Programación en C y scripting en Shell.</p>
-                    <div class="project-link-indicator">↗ ENLACE A GITHUB</div>
-                  </div>
-                </a>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <footer class="foot terminal-footer">
-          <span class="cursor">_</span> ALEJANDRO ANDREU © 2025 <span class="cursor">_</span>
-        </footer>
-      </div>
+    <section class="hero">
+      <div class="hero-rule"></div>
+      <h1 class="name">Alejandro<br>Andreu</h1>
+      <p class="role">IT Infrastructures <span class="accent">&amp;</span> CloudOps</p>
+      <p class="loc">Madrid / Segovia · España</p>
     </section>
+
+    <p class="profile">Técnico en Sistemas Microinformáticos y Redes con experiencia en administración de infraestructuras, gestión de conectividad, servicios Cloud e IT Support. Me enfoco en investigar, aprender y proponer mejoras que optimicen procesos y faciliten el trabajo diario.</p>
+
+    <section class="grid">
+
+      <div class="col">
+        <div>
+          <h2 class="section-title"><span class="num">I.</span> Competencias</h2>
+          <div class="sub">Sistemas &amp; Cloud</div>
+          <ul class="chips">
+            <li>Win Server / AD</li>
+            <li>GNU/Linux</li>
+            <li>Azure</li>
+            <li>ZTP</li>
+            <li>VMware / Hyper-V</li>
+            <li>Firewalls</li>
+            <li>Microsoft 365</li>
+            <li>Network Infrastructure</li>
+          </ul>
+          <div class="sub">Desarrollo</div>
+          <ul class="chips">
+            <li>C / C++</li>
+            <li>Bash</li>
+            <li>PowerShell</li>
+            <li>HTML / CSS / JS</li>
+            <li>SQL</li>
+          </ul>
+          <div class="sub">Habilidades</div>
+          <ul class="chips">
+            <li>IT Security</li>
+            <li>Cloud Migration</li>
+            <li>Automation</li>
+            <li>IT Support</li>
+            <li>Docker / K8s</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="section-title"><span class="num">II.</span> Idiomas</h2>
+          <div class="lang">
+            <span class="lang-name">Español</span>
+            <div class="lang-dots">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span>
+            </div>
+          </div>
+          <div class="lang">
+            <span class="lang-name">Inglés</span>
+            <div class="lang-dots">
+              <span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div>
+          <h2 class="section-title"><span class="num">III.</span> Experiencia</h2>
+          <div class="item">
+            <div class="item-date">Jun. 2025 — Actualidad · Prácticas · Presencial</div>
+            <div class="item-title">IT Support — Andersen in Spain</div>
+            <div class="item-tools">Windows Server · Azure · Intune-MDM · PaperCut · Backup</div>
+            <ul class="bullets">
+              <li>Soporte a usuarios y resolución de incidencias.</li>
+              <li>Mantenimiento y configuración de equipos.</li>
+              <li>Gestión de redes y configuración de servidores.</li>
+              <li>Migraciones locales a Azure, IAM — MDM — despliegue automatizado con Autopilot.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title"><span class="num">IV.</span> Formación</h2>
+          <div class="item">
+            <div class="item-date">2025 — 2027</div>
+            <div class="item-title">ASIR · FP CEU Madrid</div>
+            <div class="item-sub">Administración de Sistemas Informáticos en Red</div>
+          </div>
+          <div class="item">
+            <div class="item-date">2023 — 2025</div>
+            <div class="item-title">SMR · FP CEU Madrid</div>
+            <div class="item-sub">Sistemas Microinformáticos y Redes</div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title"><span class="num">V.</span> Certificaciones</h2>
+          <ul class="chips cert">
+            <li>Cisco CCNA 1</li>
+            <li>IT Essentials</li>
+            <li>Microsoft Azure Fundamentals</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col">
+        <div>
+          <h2 class="section-title"><span class="num">VI.</span> Proyectos</h2>
+          <div class="proj-list">
+            <a class="proj" href="https://github.com/4leX-42/GREX365" target="_blank" rel="noopener">
+              <div class="proj-head">
+                <span class="proj-name">GREX365 — Toolkit Microsoft 365</span>
+                <span class="proj-ext">↗</span>
+              </div>
+              <div class="proj-desc">PowerShell · Gestión masiva de miembros en Grupos M365 y Distribution Lists desde CSV. Resolución automática de Object ID y detección de tipo de grupo.</div>
+            </a>
+            <div class="proj">
+              <div class="proj-head">
+                <span class="proj-name">Implementación de Active Directory</span>
+              </div>
+              <div class="proj-desc">Creación de usuarios, grupos y políticas GPO. LDAP / Kerberos.</div>
+            </div>
+            <div class="proj">
+              <div class="proj-head">
+                <span class="proj-name">Migración a Windows Server 2022</span>
+              </div>
+              <div class="proj-desc">Hyper-V, DFS, DHCP y DNS empresarial.</div>
+            </div>
+            <a class="proj" href="https://github.com/4lex-42/Discovery-Web-42" target="_blank" rel="noopener">
+              <div class="proj-head">
+                <span class="proj-name">Piscine Discovery Web — 42 Madrid</span>
+                <span class="proj-ext">↗</span>
+              </div>
+              <div class="proj-desc">Ene 2025 · Mini-proyectos full-stack (front / back).</div>
+            </a>
+            <a class="proj" href="https://github.com/4leX-42/42-Madrid.Piscine-C-Shell.git" target="_blank" rel="noopener">
+              <div class="proj-head">
+                <span class="proj-name">Piscine C &amp; Shell — 42 Madrid</span>
+                <span class="proj-ext">↗</span>
+              </div>
+              <div class="proj-desc">Feb — Mar 2024 · Programación en C y scripting en Shell.</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="foot">
+      <div class="signature">Alejandro <span class="amp">&</span> Andreu</div>
+      <div class="contacts">
+        <a class="contact-link" href="https://www.linkedin.com/in/alex-andreu/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="contact-link" href="https://github.com/4leX-42" target="_blank" rel="noopener">GitHub</a>
+        <button class="contact-link" id="copyEmail" type="button">Email</button>
+      </div>
+      <div class="copy">© 2025</div>
+    </footer>
+
   </main>
 
   <script>
-    // JavaScript
-    const app = document.getElementById('app');
-    const boot = document.getElementById('boot');
-
-    // Boot sequence
-    function initBootEffects() {
-      // Efecto de parpadeo inicial
-      setTimeout(() => {
-        document.querySelector('.boot-terminal').style.animation = 'terminalFlicker 0.3s';
-      }, 500);
-      
-      // Efectos de glitch aleatorios durante el boot
-      const glitchInterval = setInterval(() => {
-        if (Math.random() > 0.8) {
-          const bootTerminal = document.querySelector('.boot-terminal');
-          bootTerminal.style.animation = 'glitchEffect 0.2s';
-          setTimeout(() => {
-            bootTerminal.style.animation = '';
-          }, 200);
-        }
-      }, 800);
-      
-      // Limpiar intervalo cuando termine el boot
-      setTimeout(() => {
-        clearInterval(glitchInterval);
-      }, 4000);
-    }
-
-    // Añadir estilos de animación para efectos del boot
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes terminalFlicker {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.9; }
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Iniciar boot sequence con transición cinematográfica
-    setTimeout(() => { 
-      // Iniciar transición cinematográfica
-      boot.classList.add('fade-out');
-      
-      // Mostrar el contenido principal después de que comience la transición
-      setTimeout(() => {
-        boot.style.display = 'none';
-        app.classList.remove('hidden');
-        startTerminalEffects();
-      }, 1200);
-    }, 4500);
-
-    // Inicializar efectos del boot
-    initBootEffects();
-
-    // Efectos de terminal después del boot
-    function startTerminalEffects() {
-      // Actualizar fecha y hora en tiempo real
-      updateDateTime();
-      setInterval(updateDateTime, 1000);
-      
-      // Efectos de escritura
-      typeText('typed-name', 'ALEJANDRO ANDREU', 70, true);
-      setTimeout(() => typeText('typed-role', 'IT INFRASTRUCTURES & CLOUDOPS', 50, true), 800);
-      setTimeout(() => typeText('typed-loc', 'MADRID / SEGOVIA, ESPAÑA', 50, true), 1600);
-      setTimeout(() => typeText('profile-title', '> PERFIL PROFESIONAL', 50, false), 2400);
-      setTimeout(() => typeText('profile-text', 
-        'Técnico en Sistemas Microinformáticos y Redes con experiencia en administración de infraestructuras, gestión de conectividad, servicios Cloud e IT Support. Me enfoco en investigar, aprender y proponer mejoras que optimicen procesos y faciliten el trabajo diario.', 
-        30, true), 3200);
-      
-      // Efecto glitch aleatorio
-      setInterval(randomGlitch, 20000);
-    }
-
-    // Efecto de escritura
-    function typeText(elementId, text, speed, showCursor) {
-      const element = document.getElementById(elementId);
-      if (!element) return;
-      
-      element.textContent = '';
-      if (showCursor) {
-        const cursor = document.createElement('span');
-        cursor.className = 'typing-cursor';
-        element.appendChild(cursor);
-      }
-      
-      let i = 0;
-      const timer = setInterval(() => {
-        if (i < text.length) {
-          element.textContent = text.substring(0, i + 1);
-          if (showCursor) {
-            const cursor = document.createElement('span');
-            cursor.className = 'typing-cursor';
-            element.appendChild(cursor);
-          }
-          i++;
-        } else {
-          clearInterval(timer);
-          if (showCursor) {
-            element.textContent = text;
-          }
-        }
-      }, speed);
-    }
-
-    // Actualizar fecha y hora
-    function updateDateTime() {
-      const now = new Date();
-      const datetimeElement = document.getElementById('datetime');
-      if (datetimeElement) {
-        const date = now.toLocaleDateString('es-ES', { 
-          day: '2-digit', 
-          month: '2-digit', 
-          year: 'numeric' 
-        });
-        const time = now.toLocaleTimeString('es-ES', { 
-          hour: '2-digit', 
-          minute: '2-digit',
-          second: '2-digit'
-        });
-        datetimeElement.textContent = `${date} | ${time}`;
-      }
-    }
-
-    // Efecto glitch aleatorio
-    function randomGlitch() {
-      const elements = document.querySelectorAll('.terminal-card, .name, .card-title');
-      if (elements.length > 0) {
-        const randomElement = elements[Math.floor(Math.random() * elements.length)];
-        randomElement.classList.add('glitch');
-        setTimeout(() => {
-          randomElement.classList.remove('glitch');
-        }, 200);
-      }
-    }
-
-    // Copiar email
     const copyBtn = document.getElementById('copyEmail');
-    if(copyBtn){
-      copyBtn.addEventListener('click', async() => {
+    if (copyBtn) {
+      const original = copyBtn.textContent;
+      copyBtn.addEventListener('click', async () => {
         const email = 'alexandreu.adc@proton.me';
-        try { 
-          await navigator.clipboard.writeText(email); 
-          copyBtn.querySelector('.btn-text').textContent = '[EMAIL_COPIED]';
-          copyBtn.style.background = 'rgba(0, 224, 133, 0.1)';
-          
-          setTimeout(() => {
-            copyBtn.querySelector('.btn-text').textContent = '[COPY_EMAIL]';
-            copyBtn.style.background = 'rgba(5, 5, 10, 0.95)';
-          }, 2000);
-        } catch { 
-          const tempInput = document.createElement('input');
-          tempInput.value = email;
-          document.body.appendChild(tempInput);
-          tempInput.select();
+        try {
+          await navigator.clipboard.writeText(email);
+        } catch {
+          const tmp = document.createElement('input');
+          tmp.value = email;
+          document.body.appendChild(tmp);
+          tmp.select();
           document.execCommand('copy');
-          document.body.removeChild(tempInput);
-          
-          copyBtn.querySelector('.btn-text').textContent = '[EMAIL_COPIED]';
-          copyBtn.style.background = 'rgba(0, 224, 133, 0.1)';
-          
-          setTimeout(() => {
-            copyBtn.querySelector('.btn-text').textContent = '[COPY_EMAIL]';
-            copyBtn.style.background = 'rgba(5, 5, 10, 0.95)';
-          }, 2000);
+          document.body.removeChild(tmp);
         }
+        copyBtn.textContent = 'Copiado';
+        setTimeout(() => { copyBtn.textContent = original; }, 1800);
       });
     }
-
-    // Efecto de partículas
-    (function(){
-      const canvas = document.createElement('canvas');
-      canvas.className = 'fx-layer';
-      document.body.appendChild(canvas);
-      
-      const ctx = canvas.getContext('2d');
-      let W, H, particles = [];
-      const COUNT = 30;
-
-      function resize() { 
-        W = canvas.width = innerWidth; 
-        H = canvas.height = innerHeight; 
-      }
-      
-      window.addEventListener('resize', resize); 
-      resize();
-
-      // Crear partículas
-      function spawn() {
-        particles = Array.from({length: COUNT}, () => ({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          life: Math.random() * 100,
-          maxLife: 100 + Math.random() * 200,
-          size: Math.random() * 1.2 + 0.5,
-          color: Math.random() < 0.6 ? '#00e085' : 
-                 Math.random() < 0.8 ? '#00d0ff' : 
-                 Math.random() < 0.9 ? '#ffd700' : '#5a9cff'
-        }));
-      }
-      
-      spawn();
-
-      function tick() {
-        ctx.fillStyle = 'rgba(10, 10, 18, 0.05)';
-        ctx.fillRect(0, 0, W, H);
-        
-        particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.life++;
-          
-          if (p.x < -10 || p.x > W + 10 || p.y < -10 || p.y > H + 10 || p.life > p.maxLife) {
-            p.x = Math.random() * W;
-            p.y = Math.random() * H;
-            p.life = 0;
-            p.vx = (Math.random() - 0.5) * 0.3;
-            p.vy = (Math.random() - 0.5) * 0.3;
-          }
-          
-          const alpha = 0.1 + 0.1 * Math.sin(p.life * 0.05);
-          ctx.fillStyle = p.color.replace(')', `, ${alpha})`).replace('rgb', 'rgba');
-          ctx.fillRect(p.x, p.y, p.size, p.size);
-          
-          ctx.fillStyle = p.color.replace(')', `, ${alpha * 0.3})`).replace('rgb', 'rgba');
-          ctx.fillRect(p.x - p.vx * 2, p.y - p.vy * 2, p.size * 0.7, p.size * 0.7);
-        });
-        
-        requestAnimationFrame(tick);
-      }
-      
-      requestAnimationFrame(tick);
-    })();
   </script>
 </body>
 </html>
