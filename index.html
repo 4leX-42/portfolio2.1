@@ -473,6 +473,270 @@
     @media (max-width: 420px) {
       .name { font-size: 48px; }
     }
+    /* ---- IA panel ---- */
+    .ai-open {
+      margin-top: 26px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      padding: 10px 16px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color .25s, border-color .25s, box-shadow .25s;
+    }
+    .ai-open .glyph { color: var(--accent); font-size: 13px; line-height: 1; }
+    .ai-open:hover { color: var(--accent); border-color: var(--accent-dim); box-shadow: 0 0 22px rgba(201,165,97,.08); }
+
+    .ai-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(6, 7, 8, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 3vh 3vw;
+      opacity: 0; visibility: hidden;
+      transition: opacity .35s ease, visibility .35s;
+    }
+    .ai-overlay.open { opacity: 1; visibility: visible; }
+    .ai-panel {
+      width: min(1240px, 100%);
+      height: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      display: flex; flex-direction: column;
+      box-shadow: 0 40px 120px rgba(0,0,0,.6);
+      transform: translateY(18px) scale(.985);
+      transition: transform .45s cubic-bezier(.2,.7,.2,1);
+      overflow: hidden;
+    }
+    .ai-overlay.open .ai-panel { transform: none; }
+    .ai-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 18px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ai-title { display: flex; align-items: baseline; gap: 14px; }
+    .ai-title .num { font-family: 'Fraunces', serif; font-style: italic; font-size: 22px; color: var(--accent); }
+    .ai-title h2 { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 26px; letter-spacing: -.3px; }
+    .ai-title .tag { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .ai-close {
+      width: 34px; height: 34px; border: 1px solid var(--border); background: transparent; color: var(--muted);
+      border-radius: 2px; cursor: pointer; font-size: 16px; line-height: 1; transition: color .2s, border-color .2s;
+    }
+    .ai-close:hover { color: var(--accent); border-color: var(--accent-dim); }
+    .ai-body { overflow-y: auto; padding: 30px 28px 40px; scrollbar-color: var(--border-strong) var(--bg); }
+
+    .ai-stats { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--border); margin-bottom: 34px; }
+    .ai-stats div { padding: 16px 18px; border-right: 1px solid var(--border); }
+    .ai-stats div:last-child { border-right: none; }
+    .ai-stats b { display: block; font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 30px; color: var(--text); line-height: 1.1; }
+    .ai-stats span { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1.6px; text-transform: uppercase; }
+
+    .ai-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; display: flex; gap: 12px; align-items: center; }
+    .ai-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-strong), transparent); }
+    .ai-label i { font-style: normal; color: var(--accent); }
+
+    .ai-diagram { border: 1px solid var(--border); margin-bottom: 34px; overflow-x: auto; background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(201,165,97,.035), transparent 70%); }
+    .ai-diagram svg { display: block; width: 100%; min-width: 760px; height: auto; }
+    .ai-diagram .box { fill: var(--bg); stroke: var(--border-strong); stroke-width: 1; }
+    .ai-diagram .core { fill: var(--surface); stroke: var(--accent-dim); stroke-width: 1; }
+    .ai-diagram .ring { fill: none; stroke: var(--accent); stroke-opacity: .18; }
+    .ai-diagram .wire { fill: none; stroke: var(--accent-dim); stroke-width: 1; stroke-dasharray: 3 5; animation: flow 1.6s linear infinite; }
+    .ai-diagram .h { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 1.8px; fill: var(--accent); text-transform: uppercase; }
+    .ai-diagram .t { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: var(--text); }
+    .ai-diagram .d { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; fill: var(--muted); }
+    .ai-diagram .big { font-family: 'Fraunces', serif; font-style: italic; font-size: 26px; fill: var(--text); }
+    @keyframes flow { to { stroke-dashoffset: -16; } }
+
+    .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 34px; }
+    .ai-card { background: var(--bg); padding: 22px 22px 24px; }
+    .ai-card h3 { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 1.8px; text-transform: uppercase; margin-bottom: 16px; }
+    .ai-rows { list-style: none; }
+    .ai-rows li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px dashed var(--border); font-size: 13.5px; }
+    .ai-rows li:last-child { border-bottom: none; }
+    .ai-rows li span:last-child { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-align: right; }
+    .ai-card .chips li { font-size: 11.5px; padding: 5px 9px; }
+
+    .ai-flow { display: flex; align-items: stretch; gap: 0; border: 1px solid var(--border); margin-bottom: 34px; }
+    .ai-flow div { flex: 1; padding: 18px 16px; border-right: 1px solid var(--border); position: relative; }
+    .ai-flow div:last-child { border-right: none; }
+    .ai-flow div:not(:last-child)::after { content: '→'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); background: var(--bg); color: var(--accent); font-size: 12px; padding: 2px 0; }
+    .ai-flow b { display: block; font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 15px; color: var(--accent); margin-bottom: 4px; }
+    .ai-flow span { font-size: 13px; color: var(--text); }
+
+    .ai-code {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.75;
+      background: var(--surface); border: 1px solid var(--border); padding: 18px 20px; color: var(--muted);
+      white-space: pre; overflow-x: auto;
+    }
+    .ai-code .k { color: var(--text); }
+    .ai-code .s { color: var(--accent); }
+    .ai-code .c { color: var(--dim); }
+    .ai-two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+
+    body.ai-lock { overflow: hidden; }
+
+    @media (max-width: 980px) {
+      .ai-grid { grid-template-columns: 1fr 1fr; }
+      .ai-stats { grid-template-columns: repeat(3, 1fr); }
+      .ai-stats div:nth-child(3) { border-right: none; }
+      .ai-stats div:nth-child(-n+3) { border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 680px) {
+      .ai-overlay { padding: 0; }
+      .ai-panel { border-radius: 0; border: none; }
+      .ai-head { padding: 14px 16px; }
+      .ai-title .tag { display: none; }
+      .ai-body { padding: 22px 16px 32px; }
+      .ai-grid, .ai-two { grid-template-columns: 1fr; }
+      .ai-stats { grid-template-columns: repeat(2, 1fr); }
+      .ai-stats div { border-right: 1px solid var(--border) !important; border-bottom: 1px solid var(--border); }
+      .ai-stats div:nth-child(2n) { border-right: none !important; }
+      .ai-flow { flex-direction: column; }
+      .ai-flow div { border-right: none; border-bottom: 1px solid var(--border); }
+      .ai-flow div:last-child { border-bottom: none; }
+      .ai-flow div:not(:last-child)::after { content: '↓'; right: auto; left: 16px; top: auto; bottom: -11px; transform: none; padding: 0 4px; }
+    }
+
+    .ai-plain div::after { display: none; }
+    .ai-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .ai-more { margin-left: auto; order: 3; color: var(--muted); text-decoration: none; letter-spacing: 1.4px; transition: color .2s; }
+    .ai-more:hover { color: var(--accent); }
+    .ai-label:has(.ai-more)::after { order: 2; }
+    .ai-repos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .ai-repos a { background: var(--bg); padding: 14px 18px; text-decoration: none; display: flex; flex-direction: column; gap: 3px; position: relative; transition: background .25s; }
+    .ai-repos a::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform .3s ease; }
+    .ai-repos a:hover { background: var(--surface); }
+    .ai-repos a:hover::before { transform: scaleY(1); }
+    .ai-repos b { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 12.5px; color: var(--text); }
+    .ai-repos span { font-size: 12.5px; color: var(--muted); }
+    @media (max-width: 980px) { .ai-grid-4 { grid-template-columns: 1fr 1fr; } .ai-repos { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 680px) { .ai-grid-4, .ai-repos { grid-template-columns: 1fr; } }
+
+    .xp { border: 1px solid var(--border); background: var(--surface); align-self: start; font-family: 'JetBrains Mono', monospace; }
+    .xp-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    .xp-repo { font-size: 12px; color: var(--text); display: flex; align-items: center; gap: 9px; }
+    .xp-repo em { font-style: normal; font-size: 10.5px; color: var(--muted); border: 1px solid var(--border-strong); padding: 1px 7px; border-radius: 2px; }
+    .xp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .xp-actions { display: flex; gap: 6px; }
+    .xp-actions button { font-family: inherit; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border); padding: 5px 9px; border-radius: 2px; cursor: pointer; transition: color .2s, border-color .2s; }
+    .xp-actions button:hover { color: var(--accent); border-color: var(--accent-dim); }
+    .xp-tree { padding: 10px 8px 12px; font-size: 12.5px; }
+    .xp-tree summary { list-style: none; cursor: pointer; }
+    .xp-tree summary::-webkit-details-marker { display: none; }
+    .xp-tree summary, .xp-file, .xp-dir { display: flex; align-items: center; gap: 9px; padding: 5px 8px; border-radius: 2px; color: var(--text); transition: background .15s; }
+    .xp-tree summary:hover, .xp-file:hover, .xp-dir:hover { background: var(--surface-2); }
+    .xp-tree summary::before { content: ''; width: 5px; height: 5px; border-right: 1px solid var(--muted); border-bottom: 1px solid var(--muted); transform: rotate(-45deg); transition: transform .2s; margin: 0 3px 0 1px; flex: none; }
+    .xp-tree details[open] > summary::before { transform: rotate(45deg); border-color: var(--accent); }
+    .xp-tree summary .xp-name::before, .xp-dir .xp-name::before { content: '/'; color: var(--dim); margin-right: 1px; order: 2; }
+    .xp-tree summary .xp-name, .xp-dir .xp-name { display: inline-flex; flex-direction: row-reverse; }
+    .xp-dir { padding-left: 23px; }
+    .xp-file { padding-left: 23px; color: var(--muted); }
+    .xp-file .xp-name { color: var(--text); }
+    .xp-note { margin-left: auto; font-size: 11px; color: var(--dim); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .xp-ext { font-size: 9px; letter-spacing: .6px; text-transform: uppercase; padding: 1px 5px; border: 1px solid var(--border-strong); color: var(--muted); border-radius: 2px; min-width: 28px; text-align: center; }
+    .xp-ext.ps { color: #8fa8c8; border-color: rgba(143,168,200,.3); }
+    .xp-ext.py { color: var(--accent); border-color: var(--accent-dim); }
+    .xp-ext.md { color: var(--muted); }
+    .xp-kids { margin-left: 13px; padding-left: 8px; border-left: 1px solid var(--border); }
+    .xp-accent .xp-name { color: var(--accent); }
+    .xp-ignored { opacity: .45; }
+    @media (max-width: 680px) { .xp-note { display: none; } }
+
+    .ai-gh { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--muted); text-decoration: none; border: 1px solid var(--border-strong); padding: 10px 16px; border-radius: 2px; transition: color .25s, border-color .25s; }
+    .ai-gh span { color: var(--accent); }
+    .ai-gh:hover { color: var(--accent); border-color: var(--accent-dim); }
+    .chips li:has(> a) { padding: 0; }
+    .chips li > a { display: block; padding: 6px 11px; color: inherit; text-decoration: none; }
+    .ai-card .chips li:has(> a) { padding: 0; }
+    .ai-card .chips li > a { padding: 5px 9px; }
+    .item-tools a { color: inherit; text-decoration: none; transition: color .2s; }
+    .item-tools a:hover { color: var(--accent); }
+
+    /* ---- Polish: cinematic layer ---- */
+    .name { padding-left: 0.1em; margin-left: -0.1em; }
+    html { scrollbar-color: var(--border-strong) var(--bg); }
+    ::selection { background: rgba(201, 165, 97, 0.28); color: var(--text); }
+
+
+    .rail-mark { background: linear-gradient(180deg, transparent, var(--accent-dim), transparent); }
+
+
+    .hero::after {
+      content: '';
+      position: absolute; left: 0; bottom: -1px;
+      width: 120px; height: 1px;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      align-self: center;
+      background: linear-gradient(90deg, var(--border-strong), transparent);
+    }
+
+    .chips li { transition: border-color 0.25s, color 0.25s, box-shadow 0.25s; }
+    .chips li:hover { box-shadow: 0 0 18px rgba(201, 165, 97, 0.07); }
+
+    .proj { position: relative; overflow: hidden; transition: border-color 0.25s, background 0.25s, transform 0.25s; }
+    .proj::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.35s ease;
+    }
+    a.proj:hover { background: linear-gradient(90deg, var(--surface), transparent); transform: translateX(2px); }
+    a.proj:hover::before { transform: scaleY(1); }
+
+    .item-date .live {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 8px;
+      vertical-align: 1px;
+      box-shadow: 0 0 10px rgba(201, 165, 97, 0.6);
+      animation: glow 2.8s ease-in-out infinite;
+    }
+    @keyframes glow { 50% { opacity: 0.35; box-shadow: 0 0 2px rgba(201, 165, 97, 0.2); } }
+
+    .foot { border-top: none; position: relative; }
+    .foot::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-strong) 20%, var(--border-strong) 80%, transparent);
+    }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .hero .name, .hero .role, .hero .loc, .profile, .grid > .col, .foot {
+      animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+    .hero .role { animation-delay: 0.15s; }
+    .hero .loc { animation-delay: 0.25s; }
+    .profile { animation-delay: 0.4s; }
+    .grid > .col:nth-child(1) { animation-delay: 0.55s; }
+    .grid > .col:nth-child(2) { animation-delay: 0.68s; }
+    .grid > .col:nth-child(3) { animation-delay: 0.81s; }
+    .foot { animation-delay: 0.95s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -489,6 +753,7 @@
       <h1 class="name">Alejandro<br>Andreu</h1>
       <p class="role">IT Infrastructures <span class="accent">&amp;</span> CloudOps</p>
       <p class="loc">Madrid / Segovia · España</p>
+      <button class="ai-open" id="aiOpen" type="button"><span class="glyph">◇</span> Agentic AI Lab</button>
     </section>
 
     <p class="profile">Técnico en Sistemas Microinformáticos y Redes con experiencia en administración de infraestructuras, gestión de conectividad, servicios Cloud e IT Support. Me enfoco en investigar, aprender y proponer mejoras que optimicen procesos y faciliten el trabajo diario.</p>
@@ -498,32 +763,48 @@
       <div class="col">
         <div>
           <h2 class="section-title"><span class="num">I.</span> Competencias</h2>
-          <div class="sub">Sistemas &amp; Cloud</div>
+          <div class="sub">Microsoft 365 &amp; Cloud</div>
           <ul class="chips">
-            <li>Win Server / AD</li>
-            <li>GNU/Linux</li>
-            <li>Azure</li>
-            <li>ZTP</li>
-            <li>VMware / Hyper-V</li>
+            <li><a href="https://learn.microsoft.com/entra/" target="_blank" rel="noopener">Entra ID</a></li>
+            <li><a href="https://learn.microsoft.com/exchange/exchange-online" target="_blank" rel="noopener">Exchange Online</a></li>
+            <li><a href="https://learn.microsoft.com/intune/" target="_blank" rel="noopener">Intune / Autopilot</a></li>
+            <li><a href="https://learn.microsoft.com/defender-xdr/" target="_blank" rel="noopener">Defender XDR</a></li>
+            <li><a href="https://learn.microsoft.com/entra/identity/conditional-access/" target="_blank" rel="noopener">Conditional Access / PIM</a></li>
+            <li><a href="https://learn.microsoft.com/sharepoint/" target="_blank" rel="noopener">SharePoint</a></li>
+            <li><a href="https://learn.microsoft.com/power-automate/" target="_blank" rel="noopener">Power Automate</a></li>
+            <li><a href="https://azure.microsoft.com" target="_blank" rel="noopener">Azure</a></li>
+          </ul>
+          <div class="sub">Sistemas &amp; Red</div>
+          <ul class="chips">
+            <li><a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noopener">Win Server / AD</a></li>
+            <li><a href="https://www.kernel.org" target="_blank" rel="noopener">GNU/Linux</a></li>
+            <li><a href="https://learn.microsoft.com/windows-server/virtualization/hyper-v/" target="_blank" rel="noopener">VMware / Hyper-V</a></li>
             <li>Firewalls</li>
-            <li>Microsoft 365</li>
             <li>Network Infrastructure</li>
+            <li>ZTP</li>
           </ul>
           <div class="sub">Desarrollo</div>
           <ul class="chips">
-            <li>C / C++</li>
-            <li>Bash</li>
-            <li>PowerShell</li>
-            <li>HTML / CSS / JS</li>
-            <li>SQL</li>
+            <li><a href="https://github.com/PowerShell/PowerShell" target="_blank" rel="noopener">PowerShell 5.1 / 7</a></li>
+            <li><a href="https://github.com/python/cpython" target="_blank" rel="noopener">Python</a></li>
+            <li><a href="https://www.gnu.org/software/bash/" target="_blank" rel="noopener">Bash</a></li>
+            <li><a href="https://en.cppreference.com" target="_blank" rel="noopener">C / C++</a></li>
+            <li><a href="https://learn.microsoft.com/kusto/query/" target="_blank" rel="noopener">SQL / KQL</a></li>
+            <li><a href="https://github.com/dotnet/wpf" target="_blank" rel="noopener">WPF / XAML</a></li>
+            <li><a href="https://developer.mozilla.org" target="_blank" rel="noopener">HTML / CSS / JS</a></li>
           </ul>
           <div class="sub">Habilidades</div>
           <ul class="chips">
+            <li><a href="https://learn.microsoft.com/graph/" target="_blank" rel="noopener">Graph API</a></li>
+            <li>Automation</li>
+            <li><a href="https://learn.microsoft.com/defender-xdr/incidents-overview" target="_blank" rel="noopener">Incident Response</a></li>
+            <li><a href="https://learn.microsoft.com/defender-xdr/advanced-hunting-overview" target="_blank" rel="noopener">Threat Hunting</a></li>
             <li>IT Security</li>
             <li>Cloud Migration</li>
-            <li>Automation</li>
             <li>IT Support</li>
-            <li>Docker / K8s</li>
+            <li><a href="https://github.com/git/git" target="_blank" rel="noopener">Git</a></li>
+            <li><a href="https://github.com/kubernetes/kubernetes" target="_blank" rel="noopener">Docker / K8s</a></li>
+            <li><a href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">IA / Agentes MCP</a></li>
           </ul>
         </div>
 
@@ -548,15 +829,20 @@
         <div>
           <h2 class="section-title"><span class="num">III.</span> Experiencia</h2>
           <div class="item">
-            <div class="item-date">Jun. 2025 — Actualidad · Prácticas · Presencial</div>
+            <div class="item-date"><span class="live"></span>Jun. 2025 — Actualidad · Prácticas · Presencial</div>
             <div class="item-title">IT Support — Andersen in Spain</div>
-            <div class="item-tools">Windows Server · Azure · Intune-MDM · PaperCut · Backup</div>
+            <div class="item-tools"><a href="https://learn.microsoft.com/microsoft-365/" target="_blank" rel="noopener">M365</a> · <a href="https://learn.microsoft.com/intune/" target="_blank" rel="noopener">Intune</a> · <a href="https://learn.microsoft.com/defender-xdr/" target="_blank" rel="noopener">Defender XDR</a> · <a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noopener">Windows Server</a> · <a href="https://www.papercut.com" target="_blank" rel="noopener">PaperCut</a> · <a href="https://www.mitel.com" target="_blank" rel="noopener">Mitel</a> · <a href="https://exclaimer.com" target="_blank" rel="noopener">Exclaimer</a> · VPN · <a href="https://github.com/PowerShell/PowerShell" target="_blank" rel="noopener">PowerShell</a></div>
             <ul class="bullets">
-              <li>Soporte a usuarios y resolución de incidencias (L1/L2)</li>
-              <li>Mantenimiento, configuración y hardening de endpoints</li>
-              <li>Gestión de redes y configuración de servidores</li>
-              <li>Automatización de procesos con PS + Azure (MS)</li>
-              <li>Migración a Azure (IAM / MDM) y automatización de despliegues con Autopilot</li>
+              <li>IT Support L1/L2 · hardware repair · endpoint management</li>
+              <li>M365 admin: Entra ID · Exchange Online · Intune</li>
+              <li>Device provisioning automation: Autopilot · Win32 packaging</li>
+              <li>Identity lifecycle automation (JML)</li>
+              <li>SecOps · incident response: Defender XDR</li>
+              <li>Windows Server · print servers · PaperCut</li>
+              <li>Networking · network hardening · VPN site access</li>
+              <li>Mitel telephony · Exclaimer signatures · VDR</li>
+              <li>Wolters Kluwer legal/tax platforms</li>
+              <li>Scripting: PowerShell · Python · Graph API</li>
             </ul>
           </div>
         </div>
@@ -578,9 +864,9 @@
         <div>
           <h2 class="section-title"><span class="num">V.</span> Certificaciones</h2>
           <ul class="chips cert">
-            <li>Cisco CCNA 1</li>
-            <li>IT Essentials</li>
-            <li>Microsoft Azure Fundamentals</li>
+            <li><a href="https://learn.microsoft.com/credentials/certifications/azure-fundamentals/" target="_blank" rel="noopener">Microsoft Azure Fundamentals</a></li>
+            <li><a href="https://www.netacad.com/courses/ccna-introduction-networks" target="_blank" rel="noopener">Cisco CCNA 1</a></li>
+            <li><a href="https://www.netacad.com/courses/it-essentials" target="_blank" rel="noopener">IT Essentials</a></li>
           </ul>
         </div>
       </div>
@@ -594,28 +880,49 @@
                 <span class="proj-name">GREX365 — Toolkit Microsoft 365</span>
                 <span class="proj-ext">↗</span>
               </div>
-              <div class="proj-desc">PowerShell · Gestión masiva de miembros en Grupos M365 y Distribution Lists desde CSV. Resolución automática de Object ID y detección de tipo de grupo.</div>
+              <div class="proj-desc">WPF + PowerShell · Gestión masiva de Grupos M365 y Distribution Lists desde CSV, con runspaces para no bloquear la interfaz.</div>
             </a>
             <div class="proj">
               <div class="proj-head">
-                <span class="proj-name">Implementación de Active Directory</span>
+                <span class="proj-name">Defender XDR CLI</span>
               </div>
-              <div class="proj-desc">Creación de usuarios, grupos y políticas GPO. LDAP / Kerberos.</div>
+              <div class="proj-desc">Python · Operación SOC por API: incidentes, alertas, endpoints, IOCs y hunting KQL. Auth app-only por certificado.</div>
             </div>
-            <div class="proj">
+            <a class="proj" href="https://github.com/4leX-42/usb-intune-inscripcion" target="_blank" rel="noopener">
               <div class="proj-head">
-                <span class="proj-name">Migración a Windows Server 2022</span>
-              </div>
-              <div class="proj-desc">Hyper-V, DFS, DHCP y DNS empresarial.</div>
-            </div>
-            <a class="proj" href="https://github.com/4lex-42/Discovery-Web-42" target="_blank" rel="noopener">
-              <div class="proj-head">
-                <span class="proj-name">Piscine Discovery Web — 42 Madrid</span>
+                <span class="proj-name">USB de inscripción Intune</span>
                 <span class="proj-ext">↗</span>
               </div>
-              <div class="proj-desc">Ene 2025 · Mini-proyectos full-stack (front / back).</div>
+              <div class="proj-desc">PowerShell · Registro en Autopilot desde el OOBE, sin PSGallery ni módulos preinstalados.</div>
             </a>
-            <a class="proj" href="https://github.com/4leX-42/42-Madrid.Piscine-C-Shell.git" target="_blank" rel="noopener">
+            <a class="proj" href="https://github.com/4leX-42/SCRIPTS-SUPPORT_CX" target="_blank" rel="noopener">
+              <div class="proj-head">
+                <span class="proj-name">Scripts de soporte</span>
+                <span class="proj-ext">↗</span>
+              </div>
+              <div class="proj-desc">PowerShell 5.1 / 7 · Remediación de puesto: Outlook, OneDrive, Teams, Office, ESET e iManage.</div>
+            </a>
+            <div class="proj">
+              <div class="proj-head">
+                <span class="proj-name">Motor de análisis cuantitativo</span>
+              </div>
+              <div class="proj-desc">Python · Mercados de predicción: valor esperado, Kelly y LLM local sobre datos públicos.</div>
+            </div>
+            <a class="proj" href="https://github.com/4leX-42/Vorterm7.0" target="_blank" rel="noopener">
+              <div class="proj-head">
+                <span class="proj-name">Vorterm 7.0</span>
+                <span class="proj-ext">↗</span>
+              </div>
+              <div class="proj-desc">PowerShell · Consola configurada con un solo comando.</div>
+            </a>
+            <a class="proj" href="https://github.com/4leX-42/n8n-windows-pm2" target="_blank" rel="noopener">
+              <div class="proj-head">
+                <span class="proj-name">n8n self-hosted</span>
+                <span class="proj-ext">↗</span>
+              </div>
+              <div class="proj-desc">Node.js + pm2 · n8n en Windows sin Docker, con configuración portable.</div>
+            </a>
+            <a class="proj" href="https://github.com/4leX-42/42-Madrid.Piscine-C-Shell" target="_blank" rel="noopener">
               <div class="proj-head">
                 <span class="proj-name">Piscine C &amp; Shell — 42 Madrid</span>
                 <span class="proj-ext">↗</span>
@@ -629,7 +936,7 @@
     </section>
 
     <footer class="foot">
-      <div class="signature">Alejandro <span class="amp">&</span> Andreu</div>
+      <div class="signature">Alejandro Andreu</div>
       <div class="contacts">
         <a class="contact-link" href="https://www.linkedin.com/in/alex-andreu/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="contact-link" href="https://github.com/4leX-42" target="_blank" rel="noopener">GitHub</a>
@@ -639,6 +946,263 @@
     </footer>
 
   </main>
+
+  <div class="ai-overlay" id="aiOverlay" aria-hidden="true">
+    <div class="ai-panel" role="dialog" aria-modal="true" aria-labelledby="aiTitle">
+      <header class="ai-head">
+        <div class="ai-title">
+          <span class="num">VII.</span>
+          <h2 id="aiTitle">Agentic AI Lab</h2>
+          <span class="tag">Agentic workflow · tool-agnostic</span>
+        </div>
+        <button class="ai-close" id="aiClose" type="button" aria-label="Cerrar">✕</button>
+      </header>
+
+      <div class="ai-body">
+
+        <div class="ai-label"><i>01</i> Stack</div>
+        <div class="ai-grid ai-grid-4">
+          <div class="ai-card">
+            <h3>Agents</h3>
+            <ul class="chips"><li><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">Claude Code</a></li><li><a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noopener">Gemini CLI</a></li><li><a href="https://github.com/anomalyco/opencode" target="_blank" rel="noopener">OpenCode</a></li></ul>
+          </div>
+          <div class="ai-card">
+            <h3>Protocol</h3>
+            <ul class="chips"><li><a href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">MCP</a></li><li><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">Skills</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank" rel="noopener">Subagents</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank" rel="noopener">Hooks</a></li></ul>
+          </div>
+          <div class="ai-card">
+            <h3>Local models</h3>
+            <ul class="chips"><li><a href="https://github.com/ollama/ollama" target="_blank" rel="noopener">Ollama</a></li><li><a href="https://ollama.com/library/llama2-uncensored" target="_blank" rel="noopener">Llama 2 Uncensored</a></li><li><a href="https://ollama.com/library/qwen3" target="_blank" rel="noopener">Qwen3</a></li><li><a href="https://ollama.com/library/gemma3" target="_blank" rel="noopener">Gemma 3</a></li><li><a href="https://ollama.com/library/deepseek-r1" target="_blank" rel="noopener">DeepSeek-R1</a></li></ul>
+          </div>
+          <div class="ai-card">
+            <h3>Integrations</h3>
+            <ul class="chips"><li><a href="https://learn.microsoft.com/microsoft-365/" target="_blank" rel="noopener">Microsoft 365</a></li><li><a href="https://github.com/microsoft/power-platform-skills" target="_blank" rel="noopener">Power Platform</a></li><li><a href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener">GitHub</a></li></ul>
+          </div>
+        </div>
+
+        <div class="ai-label"><i>02</i> Hands-on AI platforms</div>
+        <div class="ai-grid">
+          <div class="ai-card">
+            <h3>Enterprise · Legal</h3>
+            <ul class="chips"><li><a href="https://legora.com" target="_blank" rel="noopener">Legora</a></li><li><a href="https://copilot.microsoft.com" target="_blank" rel="noopener">Microsoft Copilot</a></li><li><a href="https://www.wolterskluwer.com" target="_blank" rel="noopener">Wolters Kluwer AI</a></li></ul>
+          </div>
+          <div class="ai-card">
+            <h3>Frontier LLMs</h3>
+            <ul class="chips"><li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li><li><a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a></li><li><a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a></li><li><a href="https://grok.com" target="_blank" rel="noopener">Grok</a></li></ul>
+          </div>
+          <div class="ai-card">
+            <h3>Open-weight · APAC · EU</h3>
+            <ul class="chips"><li><a href="https://github.com/deepseek-ai" target="_blank" rel="noopener">DeepSeek</a></li><li><a href="https://github.com/MoonshotAI" target="_blank" rel="noopener">Kimi</a></li><li><a href="https://github.com/MiniMax-AI" target="_blank" rel="noopener">MiniMax</a></li><li><a href="https://github.com/mistralai" target="_blank" rel="noopener">Mistral</a></li></ul>
+          </div>
+        </div>
+
+        <div class="ai-label"><i>03</i> Architecture</div>
+        <div class="ai-diagram">
+          <svg viewBox="0 0 1000 470" role="img" aria-label="Arquitectura del entorno de agentes">
+            <path class="wire" d="M250 95 C 340 95, 360 205, 420 220" />
+            <path class="wire" d="M250 375 C 340 375, 360 265, 420 250" />
+            <path class="wire" d="M750 95 C 660 95, 640 205, 580 220" />
+            <path class="wire" d="M750 375 C 660 375, 640 265, 580 250" />
+            <path class="wire" d="M500 110 L 500 180" />
+            <path class="wire" d="M500 290 L 500 360" />
+
+            <circle class="ring" cx="500" cy="235" r="98" />
+            <circle class="ring" cx="500" cy="235" r="124" stroke-dasharray="2 6" />
+            <rect class="core" x="420" y="180" width="160" height="110" rx="2" />
+            <text class="h" x="500" y="208" text-anchor="middle">Agent</text>
+            <text class="big" x="500" y="243" text-anchor="middle">LLM + tools</text>
+            <text class="d" x="500" y="266" text-anchor="middle">terminal · repo</text>
+
+            <rect class="box" x="380" y="24" width="240" height="86" rx="2" />
+            <text class="h" x="500" y="48" text-anchor="middle">Extensions</text>
+            <text class="t" x="500" y="72" text-anchor="middle">skills · subagents · plugins</text>
+            <text class="d" x="500" y="94" text-anchor="middle">per domain: M365 · SOC · code</text>
+
+            <rect class="box" x="30" y="30" width="220" height="130" rx="2" />
+            <text class="h" x="50" y="56">Context</text>
+            <text class="t" x="50" y="82">project instructions</text>
+            <text class="t" x="50" y="104">persistent memory</text>
+            <text class="t" x="50" y="126">versioned profiles</text>
+            <text class="d" x="50" y="148">git · reproducible</text>
+
+            <rect class="box" x="30" y="310" width="220" height="130" rx="2" />
+            <text class="h" x="50" y="336">Guardrails</text>
+            <text class="t" x="50" y="362">pre-exec hooks</text>
+            <text class="t" x="50" y="384">dry-run · rollback</text>
+            <text class="d" x="50" y="406">secret blocking</text>
+            <text class="d" x="50" y="426">least privilege</text>
+
+            <rect class="box" x="750" y="22" width="220" height="150" rx="2" />
+            <text class="h" x="770" y="48">MCP servers</text>
+            <text class="t" x="770" y="74">code graph</text>
+            <text class="t" x="770" y="94">live docs</text>
+            <text class="t" x="770" y="114">microsoft-learn</text>
+            <text class="t" x="770" y="134">power-automate</text>
+            <text class="t" x="770" y="154">github</text>
+
+            <rect class="box" x="750" y="310" width="220" height="130" rx="2" />
+            <text class="h" x="770" y="336">Connectors</text>
+            <text class="t" x="770" y="362">Microsoft 365</text>
+            <text class="t" x="770" y="384">SharePoint · Teams</text>
+            <text class="t" x="770" y="406">Docs</text>
+            <text class="d" x="770" y="426">OAuth</text>
+
+            <rect class="box" x="380" y="360" width="240" height="86" rx="2" />
+            <text class="h" x="500" y="384" text-anchor="middle">Targets</text>
+            <text class="t" x="500" y="408" text-anchor="middle">Azure · M365 · Defender</text>
+            <text class="d" x="500" y="430" text-anchor="middle">cert app-only · git · web</text>
+          </svg>
+        </div>
+
+        <div class="ai-label"><i>04</i> Case study · M365 Cloud Ops</div>
+        <div class="ai-two">
+          <div class="xp">
+            <div class="xp-bar">
+              <span class="xp-repo"><span class="xp-dot"></span>m365-lab <em>main</em></span>
+              <span class="xp-actions">
+                <button type="button" data-xp="open">Expandir</button>
+                <button type="button" data-xp="close">Contraer</button>
+              </span>
+            </div>
+            <div class="xp-tree">
+              <details>
+                <summary><span class="xp-name">lib</span><span class="xp-note">core</span></summary>
+                <div class="xp-kids">
+                  <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">Lab.psm1</span><span class="xp-note">auth cert · Graph REST · helpers</span></div>
+                </div>
+              </details>
+              <details>
+                <summary><span class="xp-name">scripts</span><span class="xp-note">operación por área</span></summary>
+                <div class="xp-kids">
+                  <div class="xp-dir"><span class="xp-name">licencias</span><span class="xp-note">auditoría · asignación</span></div>
+                  <div class="xp-dir"><span class="xp-name">buzones</span><span class="xp-note">shared · permisos · DLs</span></div>
+                  <div class="xp-dir"><span class="xp-name">intune</span><span class="xp-note">apps Win32 · compliance</span></div>
+                  <div class="xp-dir"><span class="xp-name">correo</span><span class="xp-note">sendMail app-only</span></div>
+                  <div class="xp-dir"><span class="xp-name">diagnostico</span><span class="xp-note">health · audit</span></div>
+                  <div class="xp-dir"><span class="xp-name">setup</span><span class="xp-note">app registration · cert</span></div>
+                </div>
+              </details>
+              <details>
+                <summary><span class="xp-name">jml</span><span class="xp-note">joiner · mover · leaver</span></summary>
+                <div class="xp-kids">
+                  <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">new-joiner.ps1</span><span class="xp-note">alta · grupos · TAP</span></div>
+                  <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">offboard-leaver.ps1</span><span class="xp-note">disable · revoke · shared</span></div>
+                  <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">process-list.ps1</span><span class="xp-note">cola SharePoint</span></div>
+                </div>
+              </details>
+              <details>
+                <summary><span class="xp-name">endpoint</span><span class="xp-note">Intune · Autopilot</span></summary>
+                <div class="xp-kids">
+                  <div class="xp-dir"><span class="xp-name">packages</span><span class="xp-note">build Win32 · catálogo JSON</span></div>
+                  <div class="xp-dir"><span class="xp-name">autopilot</span><span class="xp-note">ESP · perfiles · OOBE</span></div>
+                  <div class="xp-dir"><span class="xp-name">usb-enroll</span><span class="xp-note">inscripción offline</span></div>
+                </div>
+              </details>
+              <details>
+                <summary><span class="xp-name">cyber</span><span class="xp-note">SOC · Defender XDR</span></summary>
+                <div class="xp-kids">
+                  <div class="xp-dir"><span class="xp-name">xdr-cli</span><span class="xp-ext py">py</span><span class="xp-note">incidents · endpoints · IOCs</span></div>
+                  <div class="xp-dir"><span class="xp-name">kql</span><span class="xp-note">hunting queries</span></div>
+                  <div class="xp-dir"><span class="xp-name">incidentes</span><span class="xp-note">evidencias · timeline</span></div>
+                </div>
+              </details>
+              <details>
+                <summary><span class="xp-name">power-automate</span><span class="xp-note">flujos por API</span></summary>
+                <div class="xp-kids">
+                  <div class="xp-dir"><span class="xp-name">flujos</span><span class="xp-note">definiciones JSON</span></div>
+                  <div class="xp-dir"><span class="xp-name">proyectos</span><span class="xp-note">infra · entregables</span></div>
+                </div>
+              </details>
+              <details>
+                <summary><span class="xp-name">docs</span><span class="xp-note">runbooks</span></summary>
+                <div class="xp-kids">
+                  <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">CAPACIDADES.md</span><span class="xp-note">capacidad → módulo → permiso</span></div>
+                  <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">PERMISOS_APP.md</span><span class="xp-note">scopes reales</span></div>
+                  <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">RUNBOOK_SOC.md</span><span class="xp-note">respuesta a incidentes</span></div>
+                </div>
+              </details>
+              <details>
+                <summary class="xp-accent"><span class="xp-name">.agent</span><span class="xp-note">capa IA</span></summary>
+                <div class="xp-kids">
+                  <details>
+                    <summary><span class="xp-name">skills</span><span class="xp-note">6</span></summary>
+                    <div class="xp-kids">
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">consulta-m365</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">triaje-soc</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">diff-membresia</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">informe-html</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">nuevo-script</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">sync-entorno</span></div>
+                    </div>
+                  </details>
+                  <details>
+                    <summary><span class="xp-name">agents</span><span class="xp-note">6</span></summary>
+                    <div class="xp-kids">
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">auditor-m365</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">analista-soc</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">m365-licencias</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">m365-bajas</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">m365-diagnostico</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">revisor-scripts</span></div>
+                    </div>
+                  </details>
+                  <details>
+                    <summary><span class="xp-name">hooks</span><span class="xp-note">pre-exec</span></summary>
+                    <div class="xp-kids">
+                      <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">guard.ps1</span><span class="xp-note">bloquea ofuscación · secretos</span></div>
+                      <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">test-guard.ps1</span><span class="xp-note">tests</span></div>
+                    </div>
+                  </details>
+                </div>
+              </details>
+              <div class="xp-dir xp-ignored"><span class="xp-name">config · exports · logs</span><span class="xp-note">gitignored</span></div>
+              <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">AGENT.md</span><span class="xp-note">perfil operativo</span></div>
+              <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">README.md</span></div>
+            </div>
+          </div>
+          <pre class="ai-code"><span class="c"># sesión tipo · pwsh</span>
+<span class="s">PS&gt;</span> <span class="k">agent</span> "usuarios con licencia sin login en 90 días"
+  <span class="c">→ skill m365 · Graph REST · 1 llamada</span>
+  <span class="c">→ tabla + CSV en exports/</span>
+
+<span class="s">PS&gt;</span> <span class="k">agent</span> "baja de usuario"
+  <span class="c">→ plan · afectados · riesgos · rollback</span>
+  <span class="c">→ dry-run</span>
+  <span class="c">→ execute + transcript</span>
+  <span class="c">→ verify contra el tenant</span>
+
+<span class="s">PS&gt;</span> <span class="k">agent</span> "triaje incidente phishing"
+  <span class="c">→ xdr-cli · KQL hunting</span>
+  <span class="c">→ IOCs · aislar endpoint</span>
+  <span class="c">→ runbook</span></pre>
+        </div>
+
+        <div class="ai-label" style="margin-top:34px"><i>05</i> Workflow</div>
+        <div class="ai-flow">
+          <div><b>Context</b><span>lee el estado real</span></div>
+          <div><b>Plan</b><span>alcance · riesgos · rollback</span></div>
+          <div><b>Dry-run</b><span>simula sin cambiar nada</span></div>
+          <div><b>Execute</b><span>aplica con transcript</span></div>
+          <div><b>Verify</b><span>comprueba el resultado</span></div>
+        </div>
+
+        <div class="ai-label"><i>06</i> AI plugins &amp; MCP</div>
+        <div class="ai-repos">
+          <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener"><b>claude-code</b><span>agentic coding CLI</span></a>
+          <a href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener"><b>github-mcp-server</b><span>MCP · repos, issues, PRs</span></a>
+          <a href="https://github.com/MicrosoftDocs/mcp" target="_blank" rel="noopener"><b>microsoft-learn-mcp</b><span>MCP · docs Microsoft oficiales</span></a>
+          <a href="https://github.com/microsoft/mcp" target="_blank" rel="noopener"><b>azure-mcp</b><span>MCP · recursos Azure</span></a>
+          <a href="https://github.com/microsoft/power-platform-skills" target="_blank" rel="noopener"><b>power-platform-skills</b><span>plugins Power Automate</span></a>
+          <a href="https://github.com/upstash/context7" target="_blank" rel="noopener"><b>context7</b><span>MCP · docs actualizadas</span></a>
+          <a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" rel="noopener"><b>codebase-memory-mcp</b><span>MCP · grafo de código</span></a>
+          <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener"><b>rtk</b><span>proxy CLI · −60/90 % tokens</span></a>
+          <a href="https://github.com/vercel-labs/agent-browser" target="_blank" rel="noopener"><b>agent-browser</b><span>automatización web por CLI</span></a>
+        </div>
+        <a class="ai-gh" href="https://github.com/stars/4leX-42/lists/%F0%9D%99%B8%F0%9D%99%B0-%F0%9D%99%BF%F0%9D%9A%95%F0%9D%9A%9E%F0%9D%9A%90%F0%9D%9A%92%F0%9D%9A%97%F0%9D%9A%9C" target="_blank" rel="noopener">View full list on GitHub <span>↗</span></a>
+
+      </div>
+    </div>
+  </div>
 
   <script>
     const copyBtn = document.getElementById('copyEmail');
@@ -660,6 +1224,23 @@
         setTimeout(() => { copyBtn.textContent = original; }, 1800);
       });
     }
+    const aiOverlay = document.getElementById('aiOverlay');
+    const aiOpen = document.getElementById('aiOpen');
+    const aiClose = document.getElementById('aiClose');
+    const setAi = (open) => {
+      aiOverlay.classList.toggle('open', open);
+      aiOverlay.setAttribute('aria-hidden', String(!open));
+      document.body.classList.toggle('ai-lock', open);
+      (open ? aiClose : aiOpen).focus();
+    };
+    aiOpen.addEventListener('click', () => setAi(true));
+    aiClose.addEventListener('click', () => setAi(false));
+    aiOverlay.addEventListener('click', (e) => { if (e.target === aiOverlay) setAi(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && aiOverlay.classList.contains('open')) setAi(false); });
+    document.querySelectorAll('[data-xp]').forEach((btn) => btn.addEventListener('click', () => {
+      const open = btn.dataset.xp === 'open';
+      btn.closest('.xp').querySelectorAll('details').forEach((d) => { d.open = open; });
+    }));
   </script>
 </body>
 </html>
