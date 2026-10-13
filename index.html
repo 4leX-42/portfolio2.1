@@ -977,7 +977,7 @@
           </div>
           <div class="ai-card">
             <h3>Protocol</h3>
-            <ul class="chips"><li><a href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">MCP</a></li><li><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">Skills</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank" rel="noopener">Subagents</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank" rel="noopener">Hooks</a></li></ul>
+            <ul class="chips"><li><a href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">MCP</a></li><li><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">Skills</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank" rel="noopener">Subagents</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank" rel="noopener">Hooks</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/plugins" target="_blank" rel="noopener">Plugins</a></li></ul>
           </div>
           <div class="ai-card">
             <h3>Local models</h3>
@@ -1024,7 +1024,7 @@
 
             <rect class="box" x="380" y="24" width="240" height="86" rx="2" />
             <text class="h" x="500" y="48" text-anchor="middle">Extensions</text>
-            <text class="t" x="500" y="72" text-anchor="middle">skills · subagents · plugins</text>
+            <text class="t" x="500" y="72" text-anchor="middle">skills · subagents · mods</text>
             <text class="d" x="500" y="94" text-anchor="middle">per domain: M365 · SOC · code</text>
 
             <rect class="box" x="30" y="30" width="220" height="130" rx="2" />
@@ -1084,7 +1084,7 @@
                 <summary><span class="xp-name">scripts</span><span class="xp-note">operación por área</span></summary>
                 <div class="xp-kids">
                   <div class="xp-dir"><span class="xp-name">licencias</span><span class="xp-note">auditoría · asignación</span></div>
-                  <div class="xp-dir"><span class="xp-name">buzones</span><span class="xp-note">shared · permisos · DLs</span></div>
+                  <div class="xp-dir"><span class="xp-name">buzones</span><span class="xp-note">shared · permisos · DLs · ITSM</span></div>
                   <div class="xp-dir"><span class="xp-name">intune</span><span class="xp-note">apps Win32 · compliance</span></div>
                   <div class="xp-dir"><span class="xp-name">correo</span><span class="xp-note">sendMail app-only</span></div>
                   <div class="xp-dir"><span class="xp-name">diagnostico</span><span class="xp-note">health · audit</span></div>
@@ -1113,6 +1113,7 @@
                   <div class="xp-dir"><span class="xp-name">xdr-cli</span><span class="xp-ext py">py</span><span class="xp-note">incidents · endpoints · IOCs</span></div>
                   <div class="xp-dir"><span class="xp-name">kql</span><span class="xp-note">hunting queries</span></div>
                   <div class="xp-dir"><span class="xp-name">incidentes</span><span class="xp-note">evidencias · timeline</span></div>
+                  <div class="xp-file"><span class="xp-ext ps">psm1</span><span class="xp-name">SocLab.psm1</span><span class="xp-note">guard lista blanca · solo lectura</span></div>
                 </div>
               </details>
               <details>
@@ -1134,14 +1135,15 @@
                 <summary class="xp-accent"><span class="xp-name">.agent</span><span class="xp-note">capa IA</span></summary>
                 <div class="xp-kids">
                   <details>
-                    <summary><span class="xp-name">skills</span><span class="xp-note">6</span></summary>
+                    <summary><span class="xp-name">skills</span><span class="xp-note">7</span></summary>
                     <div class="xp-kids">
                       <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">consulta-m365</span></div>
                       <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">triaje-soc</span></div>
                       <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">diff-membresia</span></div>
                       <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">informe-html</span></div>
                       <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">nuevo-script</span></div>
-                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">sync-entorno</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">actualizar-entorno</span></div>
+                      <div class="xp-file"><span class="xp-ext md">md</span><span class="xp-name">kql</span><span class="xp-note">microsoft/skills</span></div>
                     </div>
                   </details>
                   <details>
@@ -1195,7 +1197,17 @@
           <div><b>Verify</b><span>comprueba el resultado</span></div>
         </div>
 
-        <div class="ai-label"><i>06</i> AI plugins &amp; MCP</div>
+        <div class="ai-label"><i>06</i> Claude Code mods</div>
+        <div class="ai-repos" style="margin-bottom:34px">
+          <a href="https://github.com/4leX-42/agents-panel" target="_blank" rel="noopener"><b>agents-panel</b><span>panel de subagentes · modelo, contexto, coste</span></a>
+          <a href="https://github.com/4leX-42/model-router" target="_blank" rel="noopener"><b>model-router</b><span>Haiku clasifica la tarea y elige modelo</span></a>
+          <a href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener"><b>caveman</b><span>salida comprimida · statusline</span></a>
+          <a href="https://github.com/SuperClaude-Org/SuperClaude_Framework" target="_blank" rel="noopener"><b>SuperClaude</b><span>comandos /sc · 19 agentes de rol</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit" target="_blank" rel="noopener"><b>pr-review-toolkit</b><span>revisión de PR por agentes</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/security-guidance" target="_blank" rel="noopener"><b>security-guidance</b><span>avisos de seguridad al editar</span></a>
+        </div>
+
+        <div class="ai-label"><i>07</i> AI plugins &amp; MCP</div>
         <div class="ai-repos">
           <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener"><b>claude-code</b><span>agentic coding CLI</span></a>
           <a href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener"><b>github-mcp-server</b><span>MCP · repos, issues, PRs</span></a>
@@ -1206,6 +1218,9 @@
           <a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" rel="noopener"><b>codebase-memory-mcp</b><span>MCP · grafo de código</span></a>
           <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener"><b>rtk</b><span>proxy CLI · −60/90 % tokens</span></a>
           <a href="https://github.com/vercel-labs/agent-browser" target="_blank" rel="noopener"><b>agent-browser</b><span>automatización web por CLI</span></a>
+          <a href="https://github.com/microsoft/skills" target="_blank" rel="noopener"><b>microsoft/skills</b><span>skill KQL · hunting Defender</span></a>
+          <a href="https://github.com/makenotion/notion-mcp-server" target="_blank" rel="noopener"><b>notion-mcp</b><span>MCP · páginas y bases de datos</span></a>
+          <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener"><b>anthropic-skills</b><span>docx · pdf · xlsx · pptx</span></a>
         </div>
         <a class="ai-gh" href="https://github.com/stars/4leX-42/lists/%F0%9D%99%B8%F0%9D%99%B0-%F0%9D%99%BF%F0%9D%9A%95%F0%9D%9A%9E%F0%9D%9A%90%F0%9D%9A%92%F0%9D%9A%97%F0%9D%9A%9C" target="_blank" rel="noopener">View full list on GitHub <span>↗</span></a>
 
