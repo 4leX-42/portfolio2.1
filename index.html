@@ -977,7 +977,7 @@
           </div>
           <div class="ai-card">
             <h3>Protocol</h3>
-            <ul class="chips"><li><a href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">MCP</a></li><li><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">Skills</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank" rel="noopener">Subagents</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank" rel="noopener">Hooks</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/plugins" target="_blank" rel="noopener">Plugins</a></li></ul>
+            <ul class="chips"><li><a href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">MCP</a></li><li><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">Skills</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank" rel="noopener">Subagents</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank" rel="noopener">Hooks</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/plugins" target="_blank" rel="noopener">Plugins</a></li><li><a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank" rel="noopener">Mods</a></li></ul>
           </div>
           <div class="ai-card">
             <h3>Local models</h3>
@@ -985,7 +985,7 @@
           </div>
           <div class="ai-card">
             <h3>Integrations</h3>
-            <ul class="chips"><li><a href="https://learn.microsoft.com/microsoft-365/" target="_blank" rel="noopener">Microsoft 365</a></li><li><a href="https://github.com/microsoft/power-platform-skills" target="_blank" rel="noopener">Power Platform</a></li><li><a href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener">GitHub</a></li></ul>
+            <ul class="chips"><li><a href="https://learn.microsoft.com/microsoft-365/" target="_blank" rel="noopener">Microsoft 365</a></li><li><a href="https://github.com/microsoft/power-platform-skills" target="_blank" rel="noopener">Power Platform</a></li><li><a href="https://github.com/microsoft/azure-devops-mcp" target="_blank" rel="noopener">Azure DevOps</a></li><li><a href="https://github.com/makenotion/notion-mcp-server" target="_blank" rel="noopener">Notion</a></li><li><a href="https://cli.github.com" target="_blank" rel="noopener">GitHub</a></li></ul>
           </div>
         </div>
 
@@ -1039,7 +1039,7 @@
             <text class="t" x="50" y="362">pre-exec hooks</text>
             <text class="t" x="50" y="384">dry-run · rollback</text>
             <text class="d" x="50" y="406">secret blocking</text>
-            <text class="d" x="50" y="426">least privilege</text>
+            <text class="d" x="50" y="426">SAST · gitleaks · least privilege</text>
 
             <rect class="box" x="750" y="22" width="220" height="150" rx="2" />
             <text class="h" x="770" y="48">MCP servers</text>
@@ -1047,13 +1047,13 @@
             <text class="t" x="770" y="94">live docs</text>
             <text class="t" x="770" y="114">microsoft-learn</text>
             <text class="t" x="770" y="134">power-automate</text>
-            <text class="t" x="770" y="154">github</text>
+            <text class="t" x="770" y="154">notion · reddit · rea</text>
 
             <rect class="box" x="750" y="310" width="220" height="130" rx="2" />
             <text class="h" x="770" y="336">Connectors</text>
             <text class="t" x="770" y="362">Microsoft 365</text>
             <text class="t" x="770" y="384">SharePoint · Teams</text>
-            <text class="t" x="770" y="406">Docs</text>
+            <text class="t" x="770" y="406">Docs · Drive · Notion</text>
             <text class="d" x="770" y="426">OAuth</text>
 
             <rect class="box" x="380" y="360" width="240" height="86" rx="2" />
@@ -1197,32 +1197,49 @@
           <div><b>Verify</b><span>comprueba el resultado</span></div>
         </div>
 
-        <div class="ai-label"><i>06</i> Claude Code mods</div>
+        <div class="ai-label"><i>06</i> Claude Code plugins &amp; mods</div>
         <div class="ai-repos" style="margin-bottom:34px">
-          <a href="https://github.com/4leX-42/agents-panel" target="_blank" rel="noopener"><b>agents-panel</b><span>panel de subagentes · modelo, contexto, coste</span></a>
-          <a href="https://github.com/4leX-42/model-router" target="_blank" rel="noopener"><b>model-router</b><span>Haiku clasifica la tarea y elige modelo</span></a>
-          <a href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener"><b>caveman</b><span>salida comprimida · statusline</span></a>
-          <a href="https://github.com/SuperClaude-Org/SuperClaude_Framework" target="_blank" rel="noopener"><b>SuperClaude</b><span>comandos /sc · 19 agentes de rol</span></a>
+          <a href="https://github.com/4leX-42/agents-panel" target="_blank" rel="noopener"><b>agents-panel</b><span>mod · panel de subagentes, modelo, contexto, coste</span></a>
+          <a href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener"><b>caveman</b><span>salida comprimida · subagentes cavecrew</span></a>
+          <a href="https://github.com/obra/superpowers" target="_blank" rel="noopener"><b>superpowers</b><span>brainstorm · plan · TDD · debugging sistemático</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/feature-dev" target="_blank" rel="noopener"><b>feature-dev</b><span>explorer · architect · reviewer</span></a>
           <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit" target="_blank" rel="noopener"><b>pr-review-toolkit</b><span>revisión de PR por agentes</span></a>
-          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/security-guidance" target="_blank" rel="noopener"><b>security-guidance</b><span>avisos de seguridad al editar</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/commit-commands" target="_blank" rel="noopener"><b>commit-commands</b><span>commit · push · PR</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management" target="_blank" rel="noopener"><b>claude-md-management</b><span>auditoría de CLAUDE.md</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/frontend-design" target="_blank" rel="noopener"><b>frontend-design</b><span>dirección visual de UI</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/session-report" target="_blank" rel="noopener"><b>session-report</b><span>informe HTML de tokens y coste</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup" target="_blank" rel="noopener"><b>claude-code-setup</b><span>recomienda hooks, skills, MCP</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/mcp-server-dev" target="_blank" rel="noopener"><b>mcp-server-dev</b><span>construir servidores MCP · MCPB</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pyright-lsp" target="_blank" rel="noopener"><b>pyright-lsp</b><span>LSP Python · tipos</span></a>
         </div>
 
-        <div class="ai-label"><i>07</i> AI plugins &amp; MCP</div>
+        <div class="ai-label"><i>07</i> Security tooling</div>
+        <div class="ai-repos" style="margin-bottom:34px">
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-security" target="_blank" rel="noopener"><b>claude-security</b><span>scan + parches verificados por agentes</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/security-guidance" target="_blank" rel="noopener"><b>security-guidance</b><span>avisos de seguridad al editar</span></a>
+          <a href="https://github.com/trailofbits/skills" target="_blank" rel="noopener"><b>trailofbits/skills</b><span>CodeQL · Semgrep · SARIF</span></a>
+          <a href="https://github.com/trailofbits/skills" target="_blank" rel="noopener"><b>insecure-defaults</b><span>secretos fallback · fail-open · crypto débil</span></a>
+          <a href="https://github.com/trailofbits/skills" target="_blank" rel="noopener"><b>supply-chain-auditor</b><span>riesgo de dependencias</span></a>
+          <a href="https://github.com/gitleaks/gitleaks" target="_blank" rel="noopener"><b>gitleaks</b><span>detección de secretos en git</span></a>
+        </div>
+
+        <div class="ai-label"><i>08</i> MCP servers &amp; CLI tools</div>
         <div class="ai-repos">
           <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener"><b>claude-code</b><span>agentic coding CLI</span></a>
-          <a href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener"><b>github-mcp-server</b><span>MCP · repos, issues, PRs</span></a>
           <a href="https://github.com/MicrosoftDocs/mcp" target="_blank" rel="noopener"><b>microsoft-learn-mcp</b><span>MCP · docs Microsoft oficiales</span></a>
-          <a href="https://github.com/microsoft/mcp" target="_blank" rel="noopener"><b>azure-mcp</b><span>MCP · recursos Azure</span></a>
-          <a href="https://github.com/microsoft/power-platform-skills" target="_blank" rel="noopener"><b>power-platform-skills</b><span>plugins Power Automate</span></a>
+          <a href="https://github.com/microsoft/mcp" target="_blank" rel="noopener"><b>azure-mcp</b><span>MCP · Azure en solo lectura</span></a>
+          <a href="https://github.com/microsoft/azure-devops-mcp" target="_blank" rel="noopener"><b>azure-devops-mcp</b><span>MCP · repos, pipelines, boards</span></a>
+          <a href="https://github.com/microsoft/power-platform-skills" target="_blank" rel="noopener"><b>power-platform-skills</b><span>MCP · flujos Power Automate</span></a>
           <a href="https://github.com/upstash/context7" target="_blank" rel="noopener"><b>context7</b><span>MCP · docs actualizadas</span></a>
-          <a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" rel="noopener"><b>codebase-memory-mcp</b><span>MCP · grafo de código</span></a>
+          <a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" rel="noopener"><b>codebase-memory-mcp</b><span>MCP · grafo de código 3D</span></a>
+          <a href="https://github.com/makenotion/notion-mcp-server" target="_blank" rel="noopener"><b>notion-mcp</b><span>MCP · páginas y bases de datos</span></a>
+          <a href="https://github.com/jorgen-k/reddit-mcp" target="_blank" rel="noopener"><b>reddit-mcp</b><span>MCP · Reddit vía RSS</span></a>
+          <a href="https://www.npmjs.com/package/rea-agents" target="_blank" rel="noopener"><b>rea</b><span>MCP · reverse engineering</span></a>
           <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener"><b>rtk</b><span>proxy CLI · −60/90 % tokens</span></a>
           <a href="https://github.com/vercel-labs/agent-browser" target="_blank" rel="noopener"><b>agent-browser</b><span>automatización web por CLI</span></a>
           <a href="https://github.com/microsoft/skills" target="_blank" rel="noopener"><b>microsoft/skills</b><span>skill KQL · hunting Defender</span></a>
-          <a href="https://github.com/makenotion/notion-mcp-server" target="_blank" rel="noopener"><b>notion-mcp</b><span>MCP · páginas y bases de datos</span></a>
           <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener"><b>anthropic-skills</b><span>docx · pdf · xlsx · pptx</span></a>
         </div>
-        <a class="ai-gh" href="https://github.com/stars/4leX-42/lists/%F0%9D%99%B8%F0%9D%99%B0-%F0%9D%99%BF%F0%9D%9A%95%F0%9D%9A%9E%F0%9D%9A%90%F0%9D%9A%92%F0%9D%9A%97%F0%9D%9A%9C" target="_blank" rel="noopener">View full list on GitHub <span>↗</span></a>
 
       </div>
     </div>
