@@ -1032,13 +1032,13 @@
             <text class="t" x="50" y="82">project instructions</text>
             <text class="t" x="50" y="104">memory graph · recall</text>
             <text class="t" x="50" y="126">versioned profiles</text>
-            <text class="d" x="50" y="148">git · 2-node sync</text>
+            <text class="d" x="50" y="148">2-node sync · MCP per project</text>
 
             <rect class="box" x="30" y="310" width="220" height="130" rx="2" />
             <text class="h" x="50" y="336">Guardrails</text>
             <text class="t" x="50" y="362">pre-exec hooks</text>
             <text class="t" x="50" y="384">dry-run · rollback</text>
-            <text class="d" x="50" y="406">secret blocking</text>
+            <text class="d" x="50" y="406">secret blocking · weekly report</text>
             <text class="d" x="50" y="426">SAST · gitleaks · least privilege</text>
 
             <rect class="box" x="750" y="22" width="220" height="150" rx="2" />
@@ -1077,7 +1077,7 @@
               <details>
                 <summary><span class="xp-name">lib</span><span class="xp-note">core</span></summary>
                 <div class="xp-kids">
-                  <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">Lab.psm1</span><span class="xp-note">auth cert · Graph REST · helpers</span></div>
+                  <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">Lab.psm1</span><span class="xp-note">auth cert · Graph REST · verify · baseline</span></div>
                 </div>
               </details>
               <details>
@@ -1087,7 +1087,7 @@
                   <div class="xp-dir"><span class="xp-name">buzones</span><span class="xp-note">shared · permisos · DLs · ITSM</span></div>
                   <div class="xp-dir"><span class="xp-name">intune</span><span class="xp-note">apps Win32 · compliance</span></div>
                   <div class="xp-dir"><span class="xp-name">correo</span><span class="xp-note">sendMail app-only</span></div>
-                  <div class="xp-dir"><span class="xp-name">diagnostico</span><span class="xp-note">health · audit</span></div>
+                  <div class="xp-dir"><span class="xp-name">diagnostico</span><span class="xp-note">health · audit · convenciones</span></div>
                   <div class="xp-dir"><span class="xp-name">setup</span><span class="xp-note">app registration · cert</span></div>
                 </div>
               </details>
@@ -1164,7 +1164,8 @@
                     <div class="xp-kids">
                       <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">guard.ps1</span><span class="xp-note">bloquea ofuscación · secretos</span></div>
                       <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">node-sync.ps1</span><span class="xp-note">pull · memoria · PR entre 2 PCs</span></div>
-                      <div class="xp-file"><span class="xp-ext py">py</span><span class="xp-name">memory-hook.py</span><span class="xp-note">recall BM25 · valida al cerrar</span></div>
+                      <div class="xp-file"><span class="xp-ext md">sh</span><span class="xp-name">lab-gateway.sh</span><span class="xp-note">pre-exec · aviso solo si hay coincidencia</span></div>
+                      <div class="xp-file"><span class="xp-ext py">py</span><span class="xp-name">memory-hook.py</span><span class="xp-note">recall BM25 de memoria y scripts · valida al cerrar</span></div>
                       <div class="xp-file"><span class="xp-ext ps">ps1</span><span class="xp-name">test-*.ps1</span><span class="xp-note">bancos de pruebas</span></div>
                     </div>
                   </details>
@@ -1210,15 +1211,9 @@
         <div class="ai-repos" style="margin-bottom:34px">
           <a href="https://github.com/4leX-42/agents-panel" target="_blank" rel="noopener"><b>agents-panel</b><span>mod · panel de subagentes, modelo, contexto, coste</span></a>
           <a href="https://github.com/JuliusBrussee/caveman" target="_blank" rel="noopener"><b>caveman</b><span>salida comprimida · subagentes cavecrew</span></a>
-          <a href="https://github.com/obra/superpowers" target="_blank" rel="noopener"><b>superpowers</b><span>brainstorm · plan · TDD · debugging sistemático</span></a>
           <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/feature-dev" target="_blank" rel="noopener"><b>feature-dev</b><span>explorer · architect · reviewer</span></a>
-          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit" target="_blank" rel="noopener"><b>pr-review-toolkit</b><span>revisión de PR por agentes</span></a>
-          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/commit-commands" target="_blank" rel="noopener"><b>commit-commands</b><span>commit · push · PR</span></a>
           <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management" target="_blank" rel="noopener"><b>claude-md-management</b><span>auditoría de CLAUDE.md</span></a>
           <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/frontend-design" target="_blank" rel="noopener"><b>frontend-design</b><span>dirección visual de UI</span></a>
-          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/session-report" target="_blank" rel="noopener"><b>session-report</b><span>informe HTML de tokens y coste</span></a>
-          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup" target="_blank" rel="noopener"><b>claude-code-setup</b><span>recomienda hooks, skills, MCP</span></a>
-          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/mcp-server-dev" target="_blank" rel="noopener"><b>mcp-server-dev</b><span>construir servidores MCP · MCPB</span></a>
           <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pyright-lsp" target="_blank" rel="noopener"><b>pyright-lsp</b><span>LSP Python · tipos</span></a>
           <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/microsoft-docs" target="_blank" rel="noopener"><b>microsoft-docs</b><span>skills · docs y código Microsoft</span></a>
           <a href="https://github.com/midudev/better-claude" target="_blank" rel="noopener"><b>better-claude</b><span>time-machine · quick-peek · image-preview</span></a>
@@ -1226,11 +1221,9 @@
 
         <div class="ai-label"><i>07</i> Security tooling</div>
         <div class="ai-repos" style="margin-bottom:34px">
-          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-security" target="_blank" rel="noopener"><b>claude-security</b><span>scan + parches verificados por agentes</span></a>
+          <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-security" target="_blank" rel="noopener"><b>claude-security</b><span>bajo demanda · scan + parches verificados</span></a>
           <a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/security-guidance" target="_blank" rel="noopener"><b>security-guidance</b><span>avisos de seguridad al editar</span></a>
-          <a href="https://github.com/trailofbits/skills" target="_blank" rel="noopener"><b>trailofbits/skills</b><span>CodeQL · Semgrep · SARIF</span></a>
-          <a href="https://github.com/trailofbits/skills" target="_blank" rel="noopener"><b>insecure-defaults</b><span>secretos fallback · fail-open · crypto débil</span></a>
-          <a href="https://github.com/trailofbits/skills" target="_blank" rel="noopener"><b>supply-chain-auditor</b><span>riesgo de dependencias</span></a>
+          <a href="https://github.com/trailofbits/skills" target="_blank" rel="noopener"><b>trailofbits/skills</b><span>bajo demanda · CodeQL · Semgrep · SARIF</span></a>
           <a href="https://github.com/gitleaks/gitleaks" target="_blank" rel="noopener"><b>gitleaks</b><span>detección de secretos en git</span></a>
         </div>
 
