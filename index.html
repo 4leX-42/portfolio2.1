@@ -3,7 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Alejandro Andreu — IT Infrastructure & Cloud Specialist</title>
+  <title>Alejandro Andreu — IT Infrastructure &amp; CloudOps</title>
+  <meta name="description" content="Alejandro Andreu · IT Infrastructure & CloudOps en Madrid. Microsoft 365, Azure, Intune y Defender XDR; automatización con PowerShell, Python y Microsoft Graph; agentes de IA con MCP propios">
+  <meta name="author" content="Alejandro Andreu">
+  <meta name="theme-color" content="#0c0d0f">
+  <link rel="canonical" href="https://4lex-42.github.io/portfolio2.1/">
+  <meta property="og:type" content="profile">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Alejandro Andreu">
+  <meta property="og:title" content="Alejandro Andreu — IT Infrastructure & CloudOps">
+  <meta property="og:description" content="Microsoft 365 · Azure · Automation · Security. Herramientas propias, automatización con Microsoft Graph y agentes de IA con MCP">
+  <meta property="og:url" content="https://4lex-42.github.io/portfolio2.1/">
+  <meta property="og:image" content="https://4lex-42.github.io/portfolio2.1/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alejandro Andreu — IT Infrastructure & CloudOps">
+  <meta name="twitter:description" content="Microsoft 365 · Azure · Automation · Security">
+  <meta name="twitter:image" content="https://4lex-42.github.io/portfolio2.1/og.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,7 +33,7 @@
       --border-strong: #2a2f37;
       --text: #ece7dc;
       --muted: #8a847a;
-      --dim: #4e4a45;
+      --dim: #77716a;
       --accent: #c9a561;
       --accent-soft: rgba(201, 165, 97, 0.08);
       --accent-dim: #8a6e38;
@@ -451,6 +468,15 @@
     }
 
     /* Responsive */
+    @media (min-width: 981px) {
+      .grid { grid-template-columns: 0.9fr 1.25fr 1.05fr; }
+      .grid > .col { justify-content: space-between; }
+      #proyectos { flex: 1; display: flex; flex-direction: column; }
+      #proyectos .rows .proj-mini { padding: 12px 4px 14px 10px; }
+      #proyectos .rows .proj-mini .proj-name { font-size: 14.5px; }
+      #proyectos .rows .proj-mini .proj-desc { font-size: 11.5px; }
+    }
+
     @media (max-width: 980px) {
       .grid { grid-template-columns: 1fr 1fr; gap: 52px; }
       .col:last-child { grid-column: 1 / -1; }
@@ -743,6 +769,30 @@
     .grid > .col:nth-child(3) { animation-delay: 0.81s; }
     .foot { animation-delay: 0.95s; }
 
+    /* ---- 2.2: header actions, levels, project tiers ---- */
+    :focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+
+
+
+    .proj-group + .proj-group { margin-top: 30px; }
+    .proj-mini { padding: 11px 16px; }
+    .proj-mini .proj-head { margin-bottom: 2px; }
+    .proj-mini .proj-name { font-size: 13.5px; }
+    .proj-mini .proj-desc { font-size: 12.5px; }
+    .rows button .proj-ext { font-size: 9.5px; letter-spacing: 1.4px; text-transform: uppercase; opacity: .8; }
+    .proj-list.rows { gap: 0; border-top: 1px solid var(--border); }
+    .rows .proj-mini { border: none; border-bottom: 1px dashed var(--border); border-radius: 0; padding: 9px 4px 9px 10px; }
+    .rows .proj-mini:last-child { border-bottom: 1px solid var(--border); }
+    .rows .proj-mini .proj-head { margin-bottom: 1px; }
+    .rows .proj-mini .proj-desc { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: .2px; }
+    button.proj { width: 100%; text-align: left; font: inherit; cursor: pointer; }
+    button.proj:hover { border-color: var(--accent-dim); background: linear-gradient(90deg, var(--surface), transparent); transform: translateX(2px); }
+    button.proj:hover::before { transform: scaleY(1); }
+    button.proj:hover .proj-ext { opacity: 1; }
+    .proj-desc a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--accent-dim); }
+    .proj-desc a:hover { color: var(--accent); }
+
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -760,7 +810,7 @@
 
     <section class="hero">
       <h1 class="name">Alejandro<br>Andreu</h1>
-      <p class="role">IT Infrastructures <span class="accent">&amp;</span> CloudOps</p>
+      <p class="role">IT Infrastructure <span class="accent">&amp;</span> CloudOps</p>
       <p class="loc">Madrid / Segovia · España</p>
       <button class="ai-open" id="aiOpen" type="button"><span class="glyph">◇</span> Agentic AI Lab</button>
     </section>
@@ -770,50 +820,53 @@
     <section class="grid">
 
       <div class="col">
-        <div>
+        <div id="competencias">
           <h2 class="section-title"><span class="num">I.</span> Competencias</h2>
-          <div class="sub">Microsoft 365 &amp; Cloud</div>
+          <div class="sub">Cloud &amp; Identity</div>
           <ul class="chips">
+            <li><a href="https://learn.microsoft.com/azure/" target="_blank" rel="noopener">Microsoft Azure</a></li>
+            <li><a href="https://learn.microsoft.com/microsoft-365/" target="_blank" rel="noopener">Microsoft 365</a></li>
             <li><a href="https://learn.microsoft.com/entra/" target="_blank" rel="noopener">Entra ID</a></li>
             <li><a href="https://learn.microsoft.com/exchange/exchange-online" target="_blank" rel="noopener">Exchange Online</a></li>
-            <li><a href="https://learn.microsoft.com/intune/" target="_blank" rel="noopener">Intune / Autopilot</a></li>
-            <li><a href="https://learn.microsoft.com/defender-xdr/" target="_blank" rel="noopener">Defender XDR</a></li>
-            <li><a href="https://learn.microsoft.com/entra/identity/conditional-access/" target="_blank" rel="noopener">Conditional Access / PIM</a></li>
-            <li><a href="https://learn.microsoft.com/sharepoint/" target="_blank" rel="noopener">SharePoint</a></li>
-            <li><a href="https://learn.microsoft.com/power-automate/" target="_blank" rel="noopener">Power Automate</a></li>
-            <li><a href="https://azure.microsoft.com" target="_blank" rel="noopener">Azure</a></li>
+            <li><a href="https://learn.microsoft.com/intune/" target="_blank" rel="noopener">Intune</a></li>
+            <li><a href="https://learn.microsoft.com/autopilot/" target="_blank" rel="noopener">Autopilot</a></li>
           </ul>
-          <div class="sub">Sistemas &amp; Red</div>
+          <div class="sub">Automation &amp; Development</div>
           <ul class="chips">
-            <li><a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noopener">Win Server / AD</a></li>
-            <li><a href="https://www.kernel.org" target="_blank" rel="noopener">GNU/Linux</a></li>
-            <li><a href="https://learn.microsoft.com/windows-server/virtualization/hyper-v/" target="_blank" rel="noopener">VMware / Hyper-V</a></li>
-            <li>Firewalls</li>
-            <li>Network Infrastructure</li>
-            <li>ZTP</li>
-          </ul>
-          <div class="sub">Desarrollo</div>
-          <ul class="chips">
-            <li><a href="https://github.com/PowerShell/PowerShell" target="_blank" rel="noopener">PowerShell 5.1 / 7</a></li>
+            <li><a href="https://github.com/PowerShell/PowerShell" target="_blank" rel="noopener">PowerShell</a></li>
+            <li><a href="https://learn.microsoft.com/graph/" target="_blank" rel="noopener">Microsoft Graph</a></li>
             <li><a href="https://github.com/python/cpython" target="_blank" rel="noopener">Python</a></li>
             <li><a href="https://www.gnu.org/software/bash/" target="_blank" rel="noopener">Bash</a></li>
-            <li><a href="https://en.cppreference.com" target="_blank" rel="noopener">C / C++</a></li>
-            <li><a href="https://learn.microsoft.com/kusto/query/" target="_blank" rel="noopener">SQL / KQL</a></li>
-            <li><a href="https://github.com/dotnet/wpf" target="_blank" rel="noopener">WPF / XAML</a></li>
-            <li><a href="https://developer.mozilla.org" target="_blank" rel="noopener">HTML / CSS / JS</a></li>
+            <li><a href="https://learn.microsoft.com/dotnet/csharp/" target="_blank" rel="noopener">C#</a></li>
+            <li>SQL</li>
           </ul>
-          <div class="sub">Habilidades</div>
+          <div class="sub">DevOps &amp; AI</div>
           <ul class="chips">
-            <li><a href="https://learn.microsoft.com/graph/" target="_blank" rel="noopener">Graph API</a></li>
-            <li>Automation</li>
-            <li><a href="https://learn.microsoft.com/defender-xdr/incidents-overview" target="_blank" rel="noopener">Incident Response</a></li>
-            <li><a href="https://learn.microsoft.com/defender-xdr/advanced-hunting-overview" target="_blank" rel="noopener">Threat Hunting</a></li>
-            <li>IT Security</li>
-            <li>Cloud Migration</li>
-            <li>IT Support</li>
             <li><a href="https://github.com/git/git" target="_blank" rel="noopener">Git</a></li>
-            <li><a href="https://github.com/kubernetes/kubernetes" target="_blank" rel="noopener">Docker / K8s</a></li>
-            <li><a href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">IA / Agentes MCP</a></li>
+            <li><a href="https://docs.github.com/actions" target="_blank" rel="noopener">GitHub Actions</a></li>
+            <li><a href="https://docs.github.com/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect" target="_blank" rel="noopener">OIDC</a></li>
+            <li><a href="https://github.com/modelcontextprotocol" target="_blank" rel="noopener">MCP</a></li>
+            <li>Agentes de IA</li>
+          </ul>
+          <div class="sub">Security &amp; Operations</div>
+          <ul class="chips">
+            <li><a href="https://learn.microsoft.com/defender-xdr/" target="_blank" rel="noopener">Defender XDR</a></li>
+            <li><a href="https://learn.microsoft.com/kusto/query/" target="_blank" rel="noopener">KQL</a></li>
+            <li>IAM</li>
+            <li><a href="https://learn.microsoft.com/security/zero-trust/" target="_blank" rel="noopener">Zero Trust</a></li>
+            <li><a href="https://learn.microsoft.com/defender-xdr/incidents-overview" target="_blank" rel="noopener">Incident Response</a></li>
+          </ul>
+          <div class="sub">Systems &amp; Networking</div>
+          <ul class="chips">
+            <li><a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noopener">Windows Server</a></li>
+            <li>Active Directory</li>
+            <li>GPO</li>
+            <li>Linux</li>
+            <li><a href="https://learn.microsoft.com/windows-server/virtualization/hyper-v/" target="_blank" rel="noopener">Hyper-V</a></li>
+            <li>VMware</li>
+            <li>DNS</li>
+            <li>DHCP</li>
+            <li>VPN</li>
           </ul>
         </div>
 
@@ -835,23 +888,29 @@
       </div>
 
       <div class="col">
-        <div>
+        <div id="experiencia">
           <h2 class="section-title"><span class="num">III.</span> Experiencia</h2>
           <div class="item">
-            <div class="item-date"><span class="live"></span>Jun. 2025 — Actualidad · Prácticas · Presencial</div>
-            <div class="item-title">IT Support — Andersen in Spain</div>
-            <div class="item-tools"><a href="https://learn.microsoft.com/microsoft-365/" target="_blank" rel="noopener">M365</a> · <a href="https://learn.microsoft.com/intune/" target="_blank" rel="noopener">Intune</a> · <a href="https://learn.microsoft.com/defender-xdr/" target="_blank" rel="noopener">Defender XDR</a> · <a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noopener">Windows Server</a> · <a href="https://www.papercut.com" target="_blank" rel="noopener">PaperCut</a> · <a href="https://www.mitel.com" target="_blank" rel="noopener">Mitel</a> · <a href="https://exclaimer.com" target="_blank" rel="noopener">Exclaimer</a> · VPN · <a href="https://github.com/PowerShell/PowerShell" target="_blank" rel="noopener">PowerShell</a></div>
+            <div class="item-date"><span class="live"></span>Jun. 2026 — Actualidad · Jornada completa · Híbrido</div>
+            <div class="item-title">IT Support II — Andersen in Spain</div>
+            <div class="item-tools"><a href="https://learn.microsoft.com/entra/" target="_blank" rel="noopener">Entra ID</a> · <a href="https://learn.microsoft.com/exchange/exchange-online" target="_blank" rel="noopener">Exchange Online</a> · <a href="https://learn.microsoft.com/intune/" target="_blank" rel="noopener">Intune</a> · <a href="https://learn.microsoft.com/graph/" target="_blank" rel="noopener">Graph</a> · <a href="https://learn.microsoft.com/defender-xdr/" target="_blank" rel="noopener">Defender XDR</a> · <a href="https://docs.github.com/actions" target="_blank" rel="noopener">GitHub Actions</a> · <a href="https://github.com/PowerShell/PowerShell" target="_blank" rel="noopener">PowerShell</a> · <a href="https://github.com/python/cpython" target="_blank" rel="noopener">Python</a></div>
             <ul class="bullets">
-              <li>IT Support L1/L2 · hardware repair · endpoint management</li>
-              <li>M365 admin: Entra ID · Exchange Online · Intune</li>
-              <li>Device provisioning automation: Autopilot · Win32 packaging</li>
-              <li>Identity lifecycle automation (JML)</li>
-              <li>SecOps · incident response: Defender XDR</li>
-              <li>Windows Server · print servers · PaperCut</li>
-              <li>Networking · network hardening · VPN site access</li>
-              <li>Mitel telephony · Exclaimer signatures · VDR</li>
-              <li>Wolters Kluwer legal/tax platforms</li>
-              <li>Scripting: PowerShell · Python · Graph API</li>
+              <li>M365 admin: Entra ID · Exchange Online · Graph</li>
+              <li>Endpoint management: Intune · Autopilot</li>
+              <li>JML automation · app-only cert auth</li>
+              <li>CI/CD: GitHub Actions · OIDC · secretless</li>
+              <li>SecOps: Defender XDR · KQL · Python CLI</li>
+              <li>AI agents · custom MCP servers · skills</li>
+            </ul>
+          </div>
+          <div class="item">
+            <div class="item-date">Jun. 2025 — Jun. 2026 · Prácticas · Presencial</div>
+            <div class="item-title">IT Support — Andersen in Spain</div>
+            <div class="item-tools"><a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noopener">Windows Server</a> · Active Directory · GPO · VPN · <a href="https://www.papercut.com" target="_blank" rel="noopener">PaperCut MF</a> · <a href="https://www.mitel.com" target="_blank" rel="noopener">Mitel</a></div>
+            <ul class="bullets">
+              <li>L1/L2 support · hardware · endpoint</li>
+              <li>Windows Server · AD · GPO · print servers</li>
+              <li>Networking · VPN · Mitel telephony</li>
             </ul>
           </div>
         </div>
@@ -870,6 +929,7 @@
           </div>
         </div>
 
+
         <div>
           <h2 class="section-title"><span class="num">V.</span> Certificaciones</h2>
           <ul class="chips cert">
@@ -881,64 +941,78 @@
       </div>
 
       <div class="col">
-        <div>
+        <div id="proyectos">
           <h2 class="section-title"><span class="num">VI.</span> Proyectos</h2>
-          <div class="proj-list">
-            <a class="proj" href="https://github.com/4leX-42/GREX365" target="_blank" rel="noopener">
-              <div class="proj-head">
-                <span class="proj-name">GREX365 — Toolkit Microsoft 365</span>
-                <span class="proj-ext">↗</span>
-              </div>
-              <div class="proj-desc">WPF + PowerShell · Gestión masiva de Grupos M365 y Distribution Lists desde CSV, con runspaces para no bloquear la interfaz.</div>
-            </a>
-            <div class="proj">
-              <div class="proj-head">
-                <span class="proj-name">Defender XDR CLI</span>
-              </div>
-              <div class="proj-desc">Python · Operación SOC por API: incidentes, alertas, endpoints, IOCs y hunting KQL. Auth app-only por certificado.</div>
+
+          <div class="proj-group">
+            <div class="sub">Infrastructure &amp; Automation</div>
+            <div class="proj-list rows">
+              <a class="proj proj-mini" href="https://github.com/4leX-42/NodeDeploy_Config" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">NodeDeploy</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">PowerShell · zero-touch build · drivers · WU · domain join</div>
+              </a>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/GREX365" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">GREX365 Toolkit</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">C# · WPF · Graph · bulk M365 groups · DLs · CSV</div>
+              </a>
+              <button class="proj proj-mini" type="button" data-open-lab>
+                <div class="proj-head"><span class="proj-name">Defender XDR CLI</span><span class="proj-ext">private</span></div>
+                <div class="proj-desc">Python · Graph Security · incidents · IOCs · KQL</div>
+              </button>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/usb-intune-inscripcion" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">USB de inscripción en Autopilot</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">PowerShell · OOBE · hardware hash → Intune</div>
+              </a>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/PrintDeploy" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">PrintDeploy</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">C# · SNMP detect · driver install · verify</div>
+              </a>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/PathShrink" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">PathShrink</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">PowerShell · OneDrive/SharePoint · paths &gt;400 chars</div>
+              </a>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/DocUnlock" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">DocUnlock</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">Python · PDF/Office · unlock · strip metadata · compress</div>
+              </a>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/SCRIPTS-SUPPORT_CX" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">Scripts de soporte y remediación</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">PowerShell 5.1/7 · M365 · Outlook · Teams · ESET · iManage</div>
+              </a>
             </div>
-            <a class="proj" href="https://github.com/4leX-42/usb-intune-inscripcion" target="_blank" rel="noopener">
-              <div class="proj-head">
-                <span class="proj-name">USB de inscripción Intune</span>
-                <span class="proj-ext">↗</span>
+          </div>
+
+          <div class="proj-group">
+            <div class="sub">Personal &amp; open source</div>
+            <div class="proj-list rows">
+              <a class="proj proj-mini" href="https://github.com/4leX-42/Vorterm" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">Vorterm</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">PowerShell · one-command dev env · console setup</div>
+              </a>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/PastDow" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">PAST&amp;DOW</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">C# · WebView2 · yt-dlp wrapper · winget</div>
+              </a>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/LEDES-Converter" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">LEDES Converter</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">Python · PDF → LEDES 98BI · offline</div>
+              </a>
+              <div class="proj proj-mini">
+                <div class="proj-head"><span class="proj-name">Microsoft Docs · PRs</span></div>
+                <div class="proj-desc">Graph (<a href="https://github.com/microsoftgraph/microsoft-graph-docs-contrib/pull/10070" target="_blank" rel="noopener">#10070</a>, <a href="https://github.com/microsoftgraph/microsoft-graph-docs-contrib/pull/10071" target="_blank" rel="noopener">#10071</a>) · EXO PowerShell (<a href="https://github.com/MicrosoftDocs/office-docs-powershell/pull/13838" target="_blank" rel="noopener">#13838</a>, <a href="https://github.com/MicrosoftDocs/office-docs-powershell/pull/13839" target="_blank" rel="noopener">#13839</a>)</div>
               </div>
-              <div class="proj-desc">PowerShell · Registro en Autopilot desde el OOBE, sin PSGallery ni módulos preinstalados.</div>
-            </a>
-            <a class="proj" href="https://github.com/4leX-42/SCRIPTS-SUPPORT_CX" target="_blank" rel="noopener">
-              <div class="proj-head">
-                <span class="proj-name">Scripts de soporte</span>
-                <span class="proj-ext">↗</span>
-              </div>
-              <div class="proj-desc">PowerShell 5.1 / 7 · Remediación de puesto: Outlook, OneDrive, Teams, Office, ESET e iManage.</div>
-            </a>
-            <a class="proj" href="https://github.com/4leX-42/PastDow" target="_blank" rel="noopener">
-              <div class="proj-head">
-                <span class="proj-name">PAST&amp;DOW</span>
-                <span class="proj-ext">↗</span>
-              </div>
-              <div class="proj-desc">C# · Pega un enlace y descarga vídeo o audio a la mejor calidad en Windows, sobre yt-dlp.</div>
-            </a>
-            <a class="proj" href="https://github.com/4leX-42/Vorterm7.0" target="_blank" rel="noopener">
-              <div class="proj-head">
-                <span class="proj-name">Vorterm 7.0</span>
-                <span class="proj-ext">↗</span>
-              </div>
-              <div class="proj-desc">PowerShell · Consola configurada con un solo comando.</div>
-            </a>
-            <a class="proj" href="https://github.com/4leX-42/42-Madrid.Piscine-C-Shell" target="_blank" rel="noopener">
-              <div class="proj-head">
-                <span class="proj-name">Piscine C &amp; Shell — 42 Madrid</span>
-                <span class="proj-ext">↗</span>
-              </div>
-              <div class="proj-desc">Feb — Mar 2024 · Programación en C y scripting en Shell.</div>
-            </a>
+              <a class="proj proj-mini" href="https://github.com/4leX-42/42-Madrid.Piscine-C-Shell" target="_blank" rel="noopener">
+                <div class="proj-head"><span class="proj-name">Piscine C &amp; Shell — 42 Madrid</span><span class="proj-ext">↗</span></div>
+                <div class="proj-desc">C · Shell · 2024</div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
     </section>
 
-    <footer class="foot">
+    <footer class="foot" id="contacto">
       <div class="signature">Alejandro Andreu</div>
       <div class="contacts">
         <a class="contact-link" href="https://www.linkedin.com/in/alex-andreu/" target="_blank" rel="noopener">LinkedIn</a>
@@ -1244,38 +1318,61 @@
   </div>
 
   <script>
-    const copyBtn = document.getElementById('copyEmail');
-    if (copyBtn) {
-      const original = copyBtn.textContent;
-      copyBtn.addEventListener('click', async () => {
-        const email = 'alexandreu.adc@proton.me';
-        try {
-          await navigator.clipboard.writeText(email);
-        } catch {
-          const tmp = document.createElement('input');
-          tmp.value = email;
-          document.body.appendChild(tmp);
-          tmp.select();
-          document.execCommand('copy');
-          document.body.removeChild(tmp);
-        }
-        copyBtn.textContent = 'Copiado';
-        setTimeout(() => { copyBtn.textContent = original; }, 1800);
+    const EMAIL = 'alexandreu.adc@proton.me';
+    const copyEmail = async () => {
+      try {
+        await navigator.clipboard.writeText(EMAIL);
+      } catch {
+        const tmp = document.createElement('input');
+        tmp.value = EMAIL;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand('copy');
+        document.body.removeChild(tmp);
+      }
+    };
+    ['copyEmail'].forEach((id) => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      const original = btn.textContent;
+      btn.addEventListener('click', async () => {
+        await copyEmail();
+        btn.textContent = 'Copiado';
+        setTimeout(() => { btn.textContent = original; }, 1800);
       });
-    }
+    });
+
     const aiOverlay = document.getElementById('aiOverlay');
     const aiOpen = document.getElementById('aiOpen');
     const aiClose = document.getElementById('aiClose');
-    const setAi = (open) => {
+    const mainEl = document.querySelector('main');
+    const railEl = document.querySelector('.rail');
+    let lastTrigger = aiOpen;
+    aiOverlay.inert = true;
+    const setAi = (open, trigger) => {
+      if (open && trigger) lastTrigger = trigger;
       aiOverlay.classList.toggle('open', open);
       aiOverlay.setAttribute('aria-hidden', String(!open));
+      aiOverlay.inert = !open;
+      mainEl.inert = open;
+      railEl.inert = open;
       document.body.classList.toggle('ai-lock', open);
-      (open ? aiClose : aiOpen).focus();
+      (open ? aiClose : lastTrigger).focus();
     };
-    aiOpen.addEventListener('click', () => setAi(true));
+    aiOpen.addEventListener('click', () => setAi(true, aiOpen));
+    document.querySelectorAll('[data-open-lab]').forEach((el) => el.addEventListener('click', () => setAi(true, el)));
     aiClose.addEventListener('click', () => setAi(false));
     aiOverlay.addEventListener('click', (e) => { if (e.target === aiOverlay) setAi(false); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && aiOverlay.classList.contains('open')) setAi(false); });
+    document.addEventListener('keydown', (e) => {
+      if (!aiOverlay.classList.contains('open')) return;
+      if (e.key === 'Escape') { setAi(false); return; }
+      if (e.key !== 'Tab') return;
+      const f = [...aiOverlay.querySelectorAll('a[href], button:not([disabled]), summary')].filter((n) => n.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
     document.querySelectorAll('[data-xp]').forEach((btn) => btn.addEventListener('click', () => {
       const open = btn.dataset.xp === 'open';
       btn.closest('.xp').querySelectorAll('details').forEach((d) => { d.open = open; });
